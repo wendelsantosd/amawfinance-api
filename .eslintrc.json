@@ -1,24 +1,59 @@
 {
     "env": {
         "es2021": true,
-        "node": true
+        "node": true,
+        "jest": true
     },
     "extends": [
         "eslint:recommended",
+        "plugin:import/errors",
+        "plugin:import/warnings",
+        "plugin:@typescript-eslint/eslint-recommended",
         "plugin:@typescript-eslint/recommended"
     ],
+    "plugins": [
+        "import",
+        "@typescript-eslint",
+        "eslint-plugin-import",
+        "eslint-plugin-import-helpers"
+    ],
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
-        "ecmaVersion": 13,
-        "sourceType": "module"
+        "ecmaVersion": 12,
+        "sourceType": "module",
+        "warnOnUnsupportedTypeScriptVersion": false
     },
-    "plugins": [
-        "@typescript-eslint"
-    ],
     "rules": {
+        "@typescript-eslint/no-explicit-any": 0,
+        "no-unused-vars": 0,
+        "node/no-unsupported-features/es-syntax": 0,
+        "strict": 0,
+        "import-helpers/order-imports": [
+            "warn",
+            {
+                "newlinesBetween": "always",
+                "groups": [
+                    "module",
+                    "/^@/",
+                    [
+                        "parent",
+                        "sibling",
+                        "index"
+                    ]
+                ],
+                "alphabetize": {
+                    "order": "asc",
+                    "ignoreCase": true
+                }
+            }
+        ],
         "indent": [
             "error",
-            "tab"
+            4
         ],
         "linebreak-style": [
             "error",
@@ -31,6 +66,23 @@
         "semi": [
             "error",
             "never"
+        ],
+        "func-names": "off",
+        "comma-dangle": [
+            "error",
+            "never"
         ]
+    },
+    "settings": {
+        "import/parsers": {
+            "@typescript-eslint/parser": [
+                ".ts"
+            ]
+        },
+        "import/resolver": {
+            "typescript": {
+                "alwaysTryTypes": true
+            }
+        }
     }
 }
