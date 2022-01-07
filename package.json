@@ -6,9 +6,11 @@
   "author": "Wendel Santos",
   "dependencies": {
     "@prisma/client": "3.7.0",
+    "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "express": "^4.17.2",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.16.7",
@@ -16,11 +18,13 @@
     "@babel/node": "^7.16.7",
     "@babel/preset-env": "^7.16.5",
     "@babel/preset-typescript": "^7.16.5",
+    "@types/bcrypt": "^5.0.0",
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
     "@types/jest": "^27.0.3",
     "@types/morgan": "^1.9.3",
     "@types/supertest": "^2.0.11",
+    "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^5.8.1",
     "@typescript-eslint/parser": "^5.8.1",
     "babel-plugin-module-resolver": "^4.1.0",
@@ -40,6 +44,7 @@
   "scripts": {
     "dev": "nodemon",
     "build": "rm -rf dist && babel src --extensions \".ts\" --out-dir dist --copy-files --no-copy-ignored",
+    "seed": "tsc ./src/seed/adminUser.ts && node ./src/seed/adminUser.js && rm -rf ./src/seed/adminUser.js",
     "lint": "yarn eslint --fix src/**/*.ts",
     "patch": "yarn version --patch --no-git-tag-version --no-commit-hooks",
     "minor": "yarn version --minor --no-git-tag-version --no-commit-hooks",
