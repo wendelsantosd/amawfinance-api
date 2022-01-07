@@ -1,0 +1,26 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialActions"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model users {
+  id              String                 @id @default(uuid())
+  name            String                 @db.VarChar(255)
+  access_level    enum_user_access_level
+  phone           String?                @db.VarChar(255)
+  email           String                 @unique @db.VarChar(255)
+  password        String                 @db.VarChar(255)
+  confirmed_email Boolean                @default(false)
+  created_at      DateTime               @db.Timestamptz(6)
+  updated_at      DateTime               @db.Timestamptz(6)
+}
+
+enum enum_user_access_level {
+  client
+  admin
+}
