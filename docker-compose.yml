@@ -1,9 +1,9 @@
 version: "3.9"
 
 services:
-  sensnow-db:
+  amawfinance-db:
     image: postgres
-    container_name: sensnow-db
+    container_name: amawfinance-db
     ports:
       - 5432:5432
     environment:
@@ -13,18 +13,18 @@ services:
     volumes:
       - pgdata:/data/postgres
 
-  sensnow-app:
+  amawfinance-app:
     build: .
-    container_name: sensnow-app
+    container_name: amawfinance-app
     ports:
       - 3333:3333
       - 9229:9229
     volumes:
-      - .:/usr/server/sensnow-api
+      - .:/usr/server/amawfinance-api
     links:
-      - sensnow-db
+      - amawfinance-db
     depends_on:
-      - sensnow-db
+      - amawfinance-db
 
 volumes:
   pgdata:

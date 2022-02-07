@@ -1,6 +1,6 @@
 FROM node
 
-WORKDIR /usr/server/sensnow-api
+WORKDIR /usr/server/amawfinance-api
 
 COPY package.json ./
 

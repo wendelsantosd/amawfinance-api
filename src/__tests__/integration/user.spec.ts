@@ -1,12 +1,11 @@
 import request from 'supertest'
 
-import { prisma  } from '../../database'
 import { app } from '../../index'
 
-describe('Create User', () => {
+describe('Authentication', () => {
     it('should be able to create a new user', async () => {
         const response = await request(app)
-            .post('/user/create')
+            .post('/user/auth')
             .send({
                 name: 'User Test',
                 access_level: 'client',
