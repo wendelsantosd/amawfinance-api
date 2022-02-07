@@ -3,17 +3,15 @@ import request from 'supertest'
 import { app } from '../../index'
 
 describe('Authentication', () => {
-    it('should be able to create a new user', async () => {
+    it('should be able to do login', async () => {
         const response = await request(app)
             .post('/user/auth')
             .send({
-                name: 'User Test',
-                access_level: 'client',
-                phone: '91987463522',
-                email: 'usertest@provider.com',
-                password: 'user'
+                email: 'admin@provider.com',
+                password: 'admin'
             })
-
-        expect(response.status).toBe(201)
+        
+        expect(response.status).toBe(200)
+      
     })
 })

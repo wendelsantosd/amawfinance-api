@@ -9,6 +9,6 @@ userRoutes.get('/', (req: Request, res: Response): void => {
     res.json({message: 'api on'})
 })
 
-userRoutes.get('/user/auth', userController.auth)
+userRoutes.post('/user/auth', userController.auth)
 
 export default userRoutes

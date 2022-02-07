@@ -8,7 +8,7 @@ import { prisma } from '../database'
 const userController = {
     auth: async (req: Request, res: Response): Promise<void> => {
         try {
-            const { email, password } = req.query
+            const { email, password } = req.body
 
             if (email && password) {
                 const user = await prisma.users.findUnique({
