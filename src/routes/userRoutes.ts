@@ -9,5 +9,6 @@ userRoutes.get('/', (req: Request, res: Response): void => {
 })
 
 userRoutes.post('/user/auth', userController.auth)
+userRoutes.post('/user/create', userController.create)
 
 export default userRoutes
