@@ -2,6 +2,7 @@ import {hash, compare } from 'bcrypt'
 import { Request, Response } from 'express'
 import { sign, verify } from 'jsonwebtoken'
 import { nowLocalDate } from 'provider/nowLocalDate'
+import { sendEmail } from 'services/sendEmail'
 
 import { config } from '../config'
 import { prisma } from '../database'
@@ -71,7 +72,26 @@ const userController = {
 
             delete data?.confirmed_email
 
-            // const userCreated 
+            const userCreated = await prisma.users.create({data})
+
+            if (userCreated) {
+                const { secret } = config.JWT
+                const { email } = userCreated
+
+                const token = sign(
+                    {
+                        email: data.email
+                    },
+                    secret,
+                    {
+                        expiresIn: '1d'
+                    }
+                )
+
+                sendEmail(email, token, 'confirmEmail')
+
+                res.status(201).json({ message: 'user created' })
+            }
         } catch (err: any) {
             res.status(500).json({ message: err.messages})
         }
