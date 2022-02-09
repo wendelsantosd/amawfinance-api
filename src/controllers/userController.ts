@@ -1,11 +1,12 @@
 import {hash, compare } from 'bcrypt'
 import { Request, Response } from 'express'
 import { sign, verify } from 'jsonwebtoken'
-import { nowLocalDate } from 'provider/nowLocalDate'
-import { sendEmail } from 'services/sendEmail'
+
 
 import { config } from '../config'
 import { prisma } from '../database'
+import { nowLocalDate } from '../provider/nowLocalDate'
+import { sendEmail } from '../services/sendEmail'
 
 const userController = {
     auth: async (req: Request, res: Response): Promise<void> => {
