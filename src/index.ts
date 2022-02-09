@@ -1,7 +1,10 @@
 import cors from 'cors'
 import express, { json, urlencoded } from 'express'
 import morgan from 'morgan'
+import { serve, setup } from 'swagger-ui-express'
 
+import { config }  from './config'
+import { swagger } from './docs'
 import userRoutes from './routes/userRoutes'
 
 
@@ -15,8 +18,8 @@ app.use(urlencoded({ extended: true}))
 app.use(morgan('dev'))
 app.use(userRoutes)
 
-app.listen(3333, () => {
-    console.log('server is running')
-})
+app.use('/documentation', serve, setup(swagger))
+
+app.listen(config.HTTP_SERVER_PORT, () => { console.log('Server is running!') })
 
 export { app }
