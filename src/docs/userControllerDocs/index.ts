@@ -1,7 +1,9 @@
 import { auth } from './auth.doc'
+import { create } from './create.doc'
 
 const UserControllerDocs = { 
-    ...auth
+    ...auth,
+    ...create
 }
 
 export { UserControllerDocs}
