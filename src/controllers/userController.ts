@@ -1,6 +1,7 @@
 import {hash, compare } from 'bcrypt'
 import { Request, Response } from 'express'
 import { sign, verify } from 'jsonwebtoken'
+import { nowLocalDate } from 'provider/nowLocalDate'
 
 import { config } from '../config'
 import { prisma } from '../database'
@@ -52,6 +53,27 @@ const userController = {
             }
         } catch (err: any) {
             res.status(500).json({ message: err.message })
+        }
+    },
+
+    create: async (req: Request, res: Response): Promise<void> => {
+        try {
+            const data = { ...req.body }
+
+            const { password } = data
+    
+            const hashedPassword = await hash(password, 8)
+
+            data.password = hashedPassword
+            data.access_level = 'client'
+            data.created_at = nowLocalDate()
+            data.updated_at = nowLocalDate()
+
+            delete data?.confirmed_email
+
+            // const userCreated 
+        } catch (err: any) {
+            res.status(500).json({ message: err.messages})
         }
     }
 }
