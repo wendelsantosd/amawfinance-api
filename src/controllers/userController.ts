@@ -261,6 +261,42 @@ const userController = {
         } catch (err: any) {
             res.status(500).json({ message: err.message })
         }
+    },
+
+    recoverPassword: async (req: Request, res: Response): Promise<void> => {
+        try {
+            const { email } = req.query
+
+            if (email && typeof email === 'string') {
+                const user = await prisma.users.findUnique({
+                    where: { email }
+                })
+
+                if (user) {
+                    const { secret } = config.JWT
+
+                    const token = sign(
+                        {
+                            id: user.id
+                        },
+                        secret,
+                        {
+                            expiresIn: '1d'
+                        }
+                    )
+
+                    sendEmail(email, token, 'recoverPassword')
+
+                    res.status(200).json({ message: 'email sent' })
+                } else {
+                    res.status(404).json({ message: 'user not found' })
+                }
+            } else {
+                res.status(412).json({ message: 'missing email' })
+            }
+        } catch (err: any) {
+            res.status(500).json({ message: err.message })
+        }
     }
 }
 
