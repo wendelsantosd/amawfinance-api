@@ -90,11 +90,11 @@ const id = '41f8f16f-14ac-44e8-a8c4-b0c04c7260b8'
 //     })
 // })
 
-describe('Recover password user', () => {
-    it('should be able sent a email for recover password', async () => {
-        const response = await request(app)
-            .get('/user/recover-password?email=admin@provider.com')
+// describe('Recover password user', () => {
+//     it('should be able sent a email for recover password', async () => {
+//         const response = await request(app)
+//             .get('/user/recover-password?email=admin@provider.com')
 
-        expect(response.status).toBe(200)
-    })
-})
+//         expect(response.status).toBe(200)
+//     })
+// })
