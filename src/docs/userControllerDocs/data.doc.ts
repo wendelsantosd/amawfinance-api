@@ -4,7 +4,7 @@ const data = {
             tags: [
                 'User'
             ],
-            summary: 'List an user',
+            summary: 'Data user',
             security: [
                 {
                     bearerAuth: []
