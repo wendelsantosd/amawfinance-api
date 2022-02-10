@@ -15,5 +15,6 @@ userRoutes.get('/user/list', verifyToken, userController.list)
 userRoutes.get('/user/data', verifyToken, userController.data)
 userRoutes.put('/user/update', verifyToken, userController.update)
 userRoutes.delete('/user/delete', verifyToken, userController.delete)
+userRoutes.get('/user/confirm-email/:token', userController.confirmEmail)
 
 export default userRoutes

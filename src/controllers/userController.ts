@@ -83,7 +83,7 @@ const userController = {
 
                 const token = sign(
                     {
-                        email: data.email
+                        id: userCreated.id
                     },
                     secret,
                     {
@@ -216,6 +216,50 @@ const userController = {
             }
         } catch (err: any) {
             res.status(500).json({ message: err.message})
+        }
+    },
+
+    confirmEmail: async (req: Request, res: Response): Promise<void> => {
+        try {
+            const { token } = req.params
+            
+            if (token) {
+                const { secret } = config.JWT
+
+                verify(token, secret, async (err, payload) => {
+                    if (err) {
+                        res.status(401).json({ message: err.message})
+                    }
+
+                    const id = payload?.id
+
+                    const user = await prisma.users.findUnique({
+                        where: { id }
+                    })
+
+                    if (user) {
+                        // const { loginUrl } = config.REDIRECT
+
+                        await prisma.users.update({
+                            where: { id },
+                            data: {
+                                confirmed_email: true,
+                                updated_at: nowLocalDate()
+                            }
+                        })
+
+                        res.status(200).json({ message: 'email confirmed' })
+
+                        // res.redirect(loginUrl)
+                    } else {
+                        res.status(404).json({ message: 'user not found' })
+                    }
+                })
+            } else {
+                res.status(412).json({ message: 'missing token' })
+            }
+        } catch (err: any) {
+            res.status(500).json({ message: err.message })
         }
     }
 }
