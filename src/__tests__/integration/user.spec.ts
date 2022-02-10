@@ -3,7 +3,8 @@ import request from 'supertest'
 import { app } from '../../index'
 
 const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM0ZmQxNmE4LTlmOTktNDhhMS04ZDA3LWVmZjdlMzBlMzQxNyIsImFjY2Vzc19sZXZlbCI6ImFkbWluIiwiaWF0IjoxNjQ0NTEzNTYxLCJleHAiOjE2NDUzNzc1NjF9._QT-mYTZZpKND-Chh3xgjdN5O3A9EwLUj5liSDqKMns'
-const id = '89e9f297-a9a2-46f7-9981-f7564c4275a2'
+const tokenConfirmEmail = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxZjhmMTZmLTE0YWMtNDRlOC1hOGM0LWIwYzA0YzcyNjBiOCIsImlhdCI6MTY0NDUyMTE1NywiZXhwIjoxNjQ0NjA3NTU3fQ.u5dFik1PFbsOTqIuiJoWUNmk49C9MDL75f1bWJJ1obg'
+const id = '41f8f16f-14ac-44e8-a8c4-b0c04c7260b8'
 
 describe('Authentication', () => {
     it('should be able to do login', async () => {
@@ -65,6 +66,15 @@ describe('Update a user', () => {
                 name: 'Name updated',
                 phone: '98765473899'
             })
+
+        expect(response.status).toBe(200)
+    })
+})
+
+describe('Confirm email user', () => {
+    it('should be able to confirm email  user', async () => {
+        const response = await request(app)
+            .get(`/user/confirm-email/${tokenConfirmEmail}`)
 
         expect(response.status).toBe(200)
     })
