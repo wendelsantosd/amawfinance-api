@@ -17,5 +17,6 @@ userRoutes.put('/user/update', verifyToken, userController.update)
 userRoutes.delete('/user/delete', verifyToken, userController.delete)
 userRoutes.get('/user/confirm-email/:token', userController.confirmEmail)
 userRoutes.get('/user/recover-password', userController.recoverPassword)
+userRoutes.post('/user/modify-password-by-recover/:token', userController.modifyPasswordByRecover)
 
 export default userRoutes

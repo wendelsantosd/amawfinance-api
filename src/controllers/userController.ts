@@ -297,6 +297,51 @@ const userController = {
         } catch (err: any) {
             res.status(500).json({ message: err.message })
         }
+    },
+
+    modifyPasswordByRecover: async (req: Request, res: Response): Promise<void> => {
+        try {
+            const { token } = req.params
+            const { password } = req.body
+
+            if (token && password) {
+                const { secret } = config.JWT
+
+                verify(token, secret, async (err: any, payload: any) => {
+                    if (err) {
+                        res.status(401).json({ message: err.message })
+                    }
+
+                    const user = await prisma.users.findUnique({
+                        where: {
+                            id: payload?.id
+                        }
+                    })
+
+                    if (user) {
+                        const hashedPassword = await hash(password, 8)
+
+                        await prisma.users.update({
+                            where: {
+                                id: user.id
+                            },
+                            data: {
+                                password: hashedPassword,
+                                updated_at: nowLocalDate()
+                            }
+                        })
+
+                        res.status(200).json({ message: 'password altered' })
+                    } else {
+                        res.status(404).json({ message: 'user not found' })
+                    }
+                })
+            } else {
+                res.status(412).json({ message: 'missing arguments' })
+            }
+        } catch (err: any) {
+            res.status(500).json({ message: err.message })
+        }
     }
 }
 
