@@ -173,7 +173,7 @@ const userController = {
                             data
                         })
 
-                        res.status(200).json({ message: 'user updated'} )
+                        res.status(200).json({ message: 'user updated' } )
                     } else {
                         res.status(404).json({ message: 'target user not found' })
                     }
