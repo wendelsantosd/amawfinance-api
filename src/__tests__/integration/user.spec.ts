@@ -42,3 +42,16 @@ describe('Create User', () => {
         expect(response.status).toBe(500)
     })
 })
+
+describe('Get a user', () => {
+    it('should be able to get a specify user', async () => {
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM0ZmQxNmE4LTlmOTktNDhhMS04ZDA3LWVmZjdlMzBlMzQxNyIsImlhdCI6MTY0NDUwNjU1NiwiZXhwIjoxNjQ1MzcwNTU2fQ.qu8fJBBp8CrAHter2LL59WvGtD14m0NBCZyulMb1WIU'
+        const id = '34fd16a8-9f99-48a1-8d07-eff7e30e3417'
+
+        const response = await request(app)
+            .get(`/user/data?id=${id}`)
+            .set('Authorization', `Bearer ${token}`)
+
+        expect(response.status).toBe(200)
+    })
+})
