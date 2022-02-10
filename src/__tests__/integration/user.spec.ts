@@ -4,6 +4,7 @@ import { app } from '../../index'
 
 const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM0ZmQxNmE4LTlmOTktNDhhMS04ZDA3LWVmZjdlMzBlMzQxNyIsImFjY2Vzc19sZXZlbCI6ImFkbWluIiwiaWF0IjoxNjQ0NTEzNTYxLCJleHAiOjE2NDUzNzc1NjF9._QT-mYTZZpKND-Chh3xgjdN5O3A9EwLUj5liSDqKMns'
 const tokenConfirmEmail = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxZjhmMTZmLTE0YWMtNDRlOC1hOGM0LWIwYzA0YzcyNjBiOCIsImlhdCI6MTY0NDUyMTE1NywiZXhwIjoxNjQ0NjA3NTU3fQ.u5dFik1PFbsOTqIuiJoWUNmk49C9MDL75f1bWJJ1obg'
+const tokenModifyPassword = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNTA3NDdiLTQ2YjMtNDFkNS1hNTk2LTZiYzA2NThiOTEzYSIsImlhdCI6MTY0NDUyNTAzMywiZXhwIjoxNjQ0NjExNDMzfQ.GgtslVhMqMNznQjLztJLxSZNk2ZsdElweAaZnsngNfs'
 const id = '41f8f16f-14ac-44e8-a8c4-b0c04c7260b8'
 
 // describe('Authentication', () => {
@@ -94,6 +95,18 @@ const id = '41f8f16f-14ac-44e8-a8c4-b0c04c7260b8'
 //     it('should be able sent a email for recover password', async () => {
 //         const response = await request(app)
 //             .get('/user/recover-password?email=admin@provider.com')
+
+//         expect(response.status).toBe(200)
+//     })
+// })
+
+// describe('Modify password by recover', () => {
+//     it('should be able modify password', async () => {
+//         const response = await request(app)
+//             .post(`/user/modify-password-by-recover/${tokenModifyPassword}`)
+//             .send({
+//                 password: '123456789'
+//             })
 
 //         expect(response.status).toBe(200)
 //     })
