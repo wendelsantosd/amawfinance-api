@@ -188,6 +188,47 @@ const userController = {
         }
     },
 
+    modifyPassword: async (req: CustomRequest, res: Response): Promise<void> => {
+        try {
+            const { user } = req
+            const { id } = req.query
+
+            if (id) {
+                if (user?.access_level ==='admin' || user?.id === id) {
+                    const targetUser = await prisma.users.findUnique({
+                        where: { id }
+                    })
+
+                    if (targetUser) {
+                        const { password } = req.body
+
+                        const hashedPassword = await hash(password, 8)
+
+                        await prisma.users.update({
+                            where: {
+                                id: targetUser.id
+                            },
+                            data: {
+                                password: hashedPassword,
+                                updated_at: nowLocalDate()
+                            }
+                        })
+
+                        res.status(200).json({ message: 'user updated' })
+                    } else {
+                        res.status(404).json({ message: 'target user not found' })
+                    }
+                } else {
+                    res.status(401).json({ message: 'unauthorized' })
+                }
+            } else {
+                res.status(412).json({ message: 'missing id' })
+            }
+        } catch (err: any) {
+            res.status(500).json({ message: err.message})
+        }
+    },
+
     delete: async (req: CustomRequest, res: Response): Promise<void> => {
         try {
             const { user } = req
