@@ -33,7 +33,8 @@ const userController = {
 
                             const token = sign(
                                 {
-                                    id: user.id
+                                    id: user.id,
+                                    access_level: user.access_level
                                 },
                                 secret,
                                 {
@@ -117,7 +118,7 @@ const userController = {
         try {
             const { user } = req
             const { id } = req.query
-
+            console.log(user)
             if (id) {
                 if (user?.access_level ==='admin' || user?.id === id) {
                     const targetUser = await prisma.users.findUnique({
@@ -126,7 +127,8 @@ const userController = {
                             id: true,
                             name: true,
                             access_level: true,
-                            phone: true
+                            phone: true,
+                            email: true
                         }
                     })
 
@@ -161,6 +163,9 @@ const userController = {
                         const data = { ...req.body }
 
                         delete data?.password
+                        delete data?.access_level
+                        delete data?.email
+                        delete data?.confirmed_email
                         data.updated_at = nowLocalDate()
 
                         await prisma.users.update({

@@ -13,6 +13,6 @@ userRoutes.post('/user/auth', userController.auth)
 userRoutes.post('/user/create', userController.create)
 userRoutes.get('/user/list', verifyToken, userController.list)
 userRoutes.get('/user/data', verifyToken, userController.data)
-userRoutes.get('/user/update', verifyToken, userController.update)
+userRoutes.put('/user/update', verifyToken, userController.update)
 
 export default userRoutes
