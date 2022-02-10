@@ -8,7 +8,7 @@ const sendEmail = async (to: string, token: string, type: string): Promise<void>
     let emailOptions = {}
 
     const url = type === 'recoverPassword' ? 
-        'http://localhost:3333/user/modify-password' : 
+        `http://localhost:3000/modify-password/${token}` : 
         `http://localhost:3333/user/confirm-email/${token}`
 
 
