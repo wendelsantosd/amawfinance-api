@@ -5,6 +5,11 @@ const list = {
                 'User'
             ],
             summary: 'User list',
+            security: [
+                {
+                    bearerAuth: []
+                }
+            ],
             responses: {
                 '200': {
                     content: {
