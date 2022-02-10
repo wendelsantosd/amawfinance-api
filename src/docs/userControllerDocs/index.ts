@@ -4,6 +4,7 @@ import { create } from './create.doc'
 import { data } from './data.doc'
 import { _delete } from './delete.doc'
 import { list } from './list.doc'
+import { modifyPassword } from './modifyPassword.doc'
 import { modifyPasswordByRecover } from './modifyPasswordByRecover.doc'
 import { recoverPassword } from './recoverPassword.doc'
 import { update } from './update.doc'
@@ -17,7 +18,8 @@ const UserControllerDocs = {
     ..._delete,
     ...confirmEmail,
     ...recoverPassword,
-    ...modifyPasswordByRecover
+    ...modifyPasswordByRecover,
+    ...modifyPassword
 }
 
 export { UserControllerDocs}

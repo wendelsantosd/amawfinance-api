@@ -5,7 +5,7 @@ import { UserControllerDocs } from './userControllerDocs'
 const swagger = {
     openapi: '3.0.0',
     info: {
-        title: 'Amaw API',
+        title: 'Amaw Finance API',
         description,
         version,
         contact: {

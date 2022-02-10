@@ -112,15 +112,15 @@ const id = '6150747b-46b3-41d5-a596-6bc0658b913a'
 //     })
 // })
 
-describe('Modify password', () => {
-    it('should be able to modify password', async () => {
-        const response = await request(app)
-            .put(`/user/update?id=${id}`)
-            .set('Authorization', `Bearer ${token}`)
-            .send({
-                password: '846745t'
-            })
+// describe('Modify password', () => {
+//     it('should be able to modify password', async () => {
+//         const response = await request(app)
+//             .put(`/user/update?id=${id}`)
+//             .set('Authorization', `Bearer ${token}`)
+//             .send({
+//                 password: '846745t'
+//             })
 
-        expect(response.status).toBe(200)
-    })
-})
+//         expect(response.status).toBe(200)
+//     })
+// })
