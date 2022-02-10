@@ -4,7 +4,7 @@ const create = {
             tags: [
                 'User'
             ],
-            summary: 'Create user',
+            summary: 'User create',
             requestBody: {
                 content: {
                     'application/json': {
