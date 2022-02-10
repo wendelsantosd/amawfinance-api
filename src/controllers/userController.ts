@@ -7,6 +7,7 @@ import { config } from '../config'
 import { prisma } from '../database'
 import { nowLocalDate } from '../provider/nowLocalDate'
 import { sendEmail } from '../services/sendEmail'
+import { CustomRequest } from '../types'
 
 const userController = {
     auth: async (req: Request, res: Response): Promise<void> => {
@@ -110,6 +111,46 @@ const userController = {
         })
 
         res.status(200).json(usersList)
+    },
+
+    data: async (req: CustomRequest, res: Response): Promise<void> => {
+        try {
+            const { user } = req
+
+            const currentUser = await prisma.users.findUnique({
+                where: {
+                    id: user.id
+                }
+            })
+
+            if (user?.access_level ==='admin' || user?.id === currentUser?.id) {
+                const { id } = req.query
+
+                if (id) {
+                    const targetUser = await prisma.users.findUnique({
+                        where: { id },
+                        select: {
+                            id: true,
+                            name: true,
+                            access_level: true,
+                            phone: true
+                        }
+                    })
+
+                    if (targetUser) {
+                        res.status(200).json(targetUser)
+                    } else {
+                        res.status(404).json({ message: 'target user not found' })
+                    }
+                } else {
+                    res.status(412).json({ message: 'missing id' })
+                }
+            } else {
+                res.status(401).json({ message: 'unauthorized' })
+            }
+        } catch (err: any) {
+            res.status(500).json({ message: err.message }) 
+        }
     }
 }
 
