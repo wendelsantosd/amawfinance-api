@@ -96,6 +96,20 @@ const userController = {
         } catch (err: any) {
             res.status(500).json({ message: err.messages})
         }
+    },
+
+    list: async (req: Request, res: Response): Promise<void> => {
+        const usersList = await prisma.users.findMany({
+            select: {
+                id: true,
+                name: true,
+                access_level: true,
+                phone: true,
+                email: true
+            }
+        })
+
+        res.status(200).json(usersList)
     }
 }
 
