@@ -71,14 +71,14 @@ describe('Update a user', () => {
     })
 })
 
-describe('Confirm email user', () => {
-    it('should be able to confirm email  user', async () => {
-        const response = await request(app)
-            .get(`/user/confirm-email/${tokenConfirmEmail}`)
+// describe('Confirm email user', () => {
+//     it('should be able to confirm email  user', async () => {
+//         const response = await request(app)
+//             .get(`/user/confirm-email/${tokenConfirmEmail}`)
 
-        expect(response.status).toBe(200)
-    })
-})
+//         expect(response.status).toBe(200)
+//     })
+// })
 
 describe('Delete a user', () => {
     it('should be able to delete a specify user', async () => {

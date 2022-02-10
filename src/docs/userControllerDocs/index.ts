@@ -1,4 +1,5 @@
 import { auth } from './auth.doc'
+import { confirmEmail } from './confirmEmail.doc'
 import { create } from './create.doc'
 import { data } from './data.doc'
 import { _delete } from './delete.doc'
@@ -11,7 +12,8 @@ const UserControllerDocs = {
     ...list,
     ...data,
     ...update,
-    ..._delete
+    ..._delete,
+    ...confirmEmail
 }
 
 export { UserControllerDocs}
