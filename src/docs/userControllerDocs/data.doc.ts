@@ -1,31 +1,24 @@
-const auth = {
-    '/user/auth': {
-        post: {
+const data = {
+    '/user/data': {
+        get: {
             tags: [
                 'User'
             ],
-            summary: 'User auth',
-            requestBody: {
-                content: {
-                    'application/json': {
-                        schema: {
-                            type: 'object',
-                            properties: {
-                                email: {
-                                    type: 'string'
-                                },
-                                password: {
-                                    type: 'password'
-                                }
-                            },
-                            example: {
-                                email: 'joao@provider.com',
-                                password: '123456'
-                            }
-                        }
-                    }
+            summary: 'List an user',
+            security: [
+                {
+                    bearerAuth: []
                 }
-            },
+            ],
+            parameters: [
+                {
+                    in: 'query',
+                    name: 'id',
+                    required: 'true',
+                    type: 'uuid',
+                    description: 'id'
+                }
+            ],
             responses: {
                 '200': {
                     content: {
@@ -33,12 +26,28 @@ const auth = {
                             schema: {
                                 type: 'object',
                                 properties: {
-                                    token: {
+                                    id: {
+                                        type: 'string'  
+                                    },
+                                    name: {
+                                        type: 'string'
+                                    },
+                                    access_level: {
+                                        type: 'string'
+                                    },
+                                    phone: {
+                                        type: 'string'
+                                    },
+                                    email: {
                                         type: 'string'
                                     }
                                 },
                                 example: {
-                                    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0ODkwIiwibmFtZSI6IkpvZ2ZnZmhuIERvZSIsImlhdCI6MTUxNjIzOTAyMn0.GARIyo2w6ZcuniX26kpmMgCmBTp5TX_6tjm2tFMkbRU'
+                                    id: '2557fa48-484b-4ca1-944d-0a2b66e3845e',
+                                    name: 'joao',
+                                    access_level: 'admin',
+                                    phone: '99999999999',
+                                    email: 'joao@provider.com'
                                 }
                             }
                         }
@@ -50,7 +59,7 @@ const auth = {
                             schema: {
                                 type: 'string',
                                 example: {
-                                    message: 'missing arguments'
+                                    message: 'missing id'
                                 }
                             }
                         }
@@ -62,7 +71,7 @@ const auth = {
                             schema: {
                                 type: 'string',
                                 example: {
-                                    message: 'email not found'
+                                    message: 'target user not found'
                                 }
                             }
                         }
@@ -74,7 +83,7 @@ const auth = {
                             schema: {
                                 type: 'string',
                                 example: {
-                                    message: 'e-mail or password incorrect'
+                                    message: 'unauthorized'
                                 }
                             }
                         }
@@ -97,4 +106,4 @@ const auth = {
     }
 }
 
-export { auth }
+export { data }
