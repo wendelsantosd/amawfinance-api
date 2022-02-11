@@ -4,7 +4,7 @@ import { app } from '../../index'
 import { nowLocalDate } from '../../provider/nowLocalDate'
 
 const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM0ZmQxNmE4LTlmOTktNDhhMS04ZDA3LWVmZjdlMzBlMzQxNyIsImFjY2Vzc19sZXZlbCI6ImFkbWluIiwiaWF0IjoxNjQ0NTEzNTYxLCJleHAiOjE2NDUzNzc1NjF9._QT-mYTZZpKND-Chh3xgjdN5O3A9EwLUj5liSDqKMns'
-const id = '6150747b-46b3-41d5-a596-6bc0658b913a'
+const id = '0f0485ce2b5acbaf528014f660dde3e5-3x4Wendel.png'
 
 
 //TO DO
@@ -26,5 +26,15 @@ const id = '6150747b-46b3-41d5-a596-6bc0658b913a'
 //             .send(file)
         
 //         expect(response.status).toBe(201)
+//     })
+// })
+
+// describe('Data profile picture', () => {
+//     it('should be able to get a profile picture', async () => {
+//         const response = await request(app)
+//             .get(`/profile-picture/data?id=${id}`)
+//             .set('Authorization', `Bearer ${token}`)
+
+//         expect(response.status).toBe(200)
 //     })
 // })
