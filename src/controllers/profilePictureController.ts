@@ -29,7 +29,7 @@ const profilePictureController = {
                         const {
                             originalname: name,
                             size,
-                            key: id,
+                            key,
                             location: url = ''
                         } = req.file
 
@@ -50,9 +50,9 @@ const profilePictureController = {
                                 data: {
                                     name,
                                     size,
-                                    id,
-                                    url: url === '' ? `${config.DEV_URL}/files/${id}` : url,
-                                    user_id: user.id,
+                                    id: key,
+                                    url: url === '' ? `${config.DEV_URL}/files/${key}` : url,
+                                    user_id: id,
                                     created_at: nowLocalDate(),
                                     updated_at: nowLocalDate()
                                 }
@@ -83,9 +83,9 @@ const profilePictureController = {
                                 data: {
                                     name,
                                     size,
-                                    id,
-                                    url,
-                                    user_id: user.id,
+                                    id: key,
+                                    url: url === '' ? `${config.DEV_URL}/files/${key}` : url,
+                                    user_id: id,
                                     created_at: nowLocalDate(),
                                     updated_at: nowLocalDate()
                                 }
