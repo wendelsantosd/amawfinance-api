@@ -6,14 +6,19 @@ import { config } from '../config'
 const sendEmail = async (to: string, token: string, type: string): Promise<void> => {
     const { user, pass } = config.NODEMAILER
     let emailOptions = {}
+    let url = ''
+    let message =''
 
-    const url = type === 'recoverPassword' ? 
-        `http://localhost:3000/modify-password/${token}` : 
-        `http://localhost:3333/user/confirm-email/${token}`
-
-
-    const message = type === 'recoverPassword' ? 
-        'confirmar sua senha' : 'confirmar seu e-mail'
+    if (type === 'confirmEmail') {
+        url = `http://localhost:3333/user/confirm-email/${token}`
+        message = 'confirmar seu e-mail'
+    } else if (type === 'recoverPassword') {
+        url = `http://localhost:3000/modify-password/${token}`
+        message = 'confirmar sua senha'
+    } else if (type === 'modifyEmail') {
+        url = `http://localhost:3333/user/alter-email/${to}/${token}`
+        message = 'confirmar seu e-mail'
+    }
 
     const transporter = createTransport(
         smtTransport({
