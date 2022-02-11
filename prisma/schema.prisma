@@ -19,6 +19,7 @@ model users {
   created_at      DateTime               @db.Timestamptz(6)
   updated_at      DateTime               @db.Timestamptz(6)
   profile_picture profile_pictures?
+  transactions    transactions[]
 }
 
 model profile_pictures {
@@ -32,7 +33,24 @@ model profile_pictures {
   updated_at DateTime @db.Timestamptz(6)
 }
 
+model transactions {
+  id          String                @id @default(uuid())
+  description String                @db.VarChar(255)
+  amount      Float
+  type        enum_transaction_type
+  date        DateTime              @db.Timestamptz(6)
+  user_id     String                @unique
+  users       users                 @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  created_at  DateTime              @db.Timestamptz(6)
+  updated_at  DateTime              @db.Timestamptz(6)
+}
+
 enum enum_user_access_level {
   client
   admin
+}
+
+enum enum_transaction_type {
+  income
+  expense
 }
