@@ -10,6 +10,7 @@ userRoutes.get('/', (req: Request, res: Response): void => {
 })
 
 userRoutes.post('/user/auth', userController.auth)
+userRoutes.post('/user/google-auth', userController.googleAuth)
 userRoutes.post('/user/create', userController.create)
 userRoutes.get('/user/list', verifyToken, userController.list)
 userRoutes.get('/user/data', verifyToken, userController.data)

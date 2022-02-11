@@ -1,12 +1,15 @@
 import {hash, compare } from 'bcrypt'
+import { createHash } from 'crypto'
 import { Request, Response } from 'express'
 import { sign, verify } from 'jsonwebtoken'
+
 
 
 import { config } from '../config'
 import { prisma } from '../database'
 import { nowLocalDate } from '../provider/nowLocalDate'
 import { sendEmail } from '../services/sendEmail'
+import { verifyIdGoogleToken } from '../services/verifyIdGoogleToken'
 import { CustomRequest } from '../types'
 
 const userController = {
@@ -54,6 +57,76 @@ const userController = {
                 }
             } else {
                 res.status(412).json({ message: 'missing arguments' })
+            }
+        } catch (err: any) {
+            res.status(500).json({ message: err.message })
+        }
+    },
+
+    googleAuth: async( req: Request, res: Response): Promise<void> => {
+        try {
+            const idToken: any = req.body?.idToken
+            const name: any = req.body?.name
+            
+            if (idToken && name) {
+                const { email }: any = await verifyIdGoogleToken(idToken).catch(err =>
+                    res.status(500).json({ message: err.message })
+                )
+
+                const alreadyExistsUser = await prisma.users.findUnique({
+                    where: { email }
+                })
+
+                if (alreadyExistsUser) {
+                    const { secret, expTime } = config.JWT
+
+                    const token = sign(
+                        {
+                            id: alreadyExistsUser.id
+                        },
+                        secret,
+                        {
+                            expiresIn: expTime
+                        }
+                    )
+
+                    res.status(200).json({ token })
+                } else {
+                    const password = createHash('md5').update('jUghayq&2619(&hjsk@').digest('hex')
+                    
+                    const user = await prisma.users.create({
+                        data: {
+                            name,
+                            email,
+                            password,
+                            access_level: 'client',
+                            phone: '',
+                            confirmed_email: true,
+                            created_at: nowLocalDate(),
+                            updated_at: nowLocalDate()
+                        }
+                    })
+
+                    if (user) {
+                        sendEmail(user.email, 'null', 'welcome')
+
+                        const { secret, expTime } = config.JWT
+
+                        const token = sign(
+                            {
+                                id: user.id
+                            },
+                            secret,
+                            {
+                                expiresIn: expTime
+                            }
+                        )
+
+                        res.status(200).json({ token })
+                    }
+                }
+            } else {
+                res.status(412).json({ message: 'missing id token or name'})
             }
         } catch (err: any) {
             res.status(500).json({ message: err.message })
