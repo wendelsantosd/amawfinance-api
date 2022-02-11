@@ -1,6 +1,7 @@
 import cors from 'cors'
 import express, { json, urlencoded } from 'express'
 import morgan from 'morgan'
+import path from 'path'
 import { serve, setup } from 'swagger-ui-express'
 
 import { config }  from './config'
@@ -21,6 +22,11 @@ app.use(userRoutes)
 app.use(profilePictureRoutes)
 
 app.use('/documentation', serve, setup(swagger))
+
+app.use(
+    '/files',
+    express.static(path.resolve(__dirname, '..', 'tmp', 'uploads'))
+)
 
 app.listen(config.HTTP_SERVER_PORT, () => { console.log('Server is running!') })
 

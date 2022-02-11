@@ -4,6 +4,7 @@ import fs from 'fs'
 import path from 'path'
 import { promisify } from 'util'
 
+import { config } from '../config'
 import { prisma } from '../database'
 import { nowLocalDate } from '../provider/nowLocalDate'
 import { CustomPictureProfileRequest, CustomRequest } from '../types'
@@ -50,7 +51,7 @@ const profilePictureController = {
                                     name,
                                     size,
                                     id,
-                                    url,
+                                    url: url === '' ? `${config.DEV_URL}/files/${id}` : url,
                                     user_id: user.id,
                                     created_at: nowLocalDate(),
                                     updated_at: nowLocalDate()
