@@ -4,6 +4,7 @@ import { confirmEmail } from './confirmEmail.doc'
 import { create } from './create.doc'
 import { data } from './data.doc'
 import { _delete } from './delete.doc'
+import { googleAuth } from './googleAuth.doc'
 import { list } from './list.doc'
 import { modifyEmail } from './modifyEmail.doc'
 import { modifyPassword } from './modifyPassword.doc'
@@ -23,7 +24,8 @@ const UserControllerDocs = {
     ...modifyPasswordByRecover,
     ...modifyPassword,
     ...modifyEmail,
-    ...alterEmail
+    ...alterEmail,
+    ...googleAuth
 }
 
 export { UserControllerDocs}

@@ -1,26 +1,26 @@
-const auth = {
-    '/user/auth': {
+const googleAuth = {
+    '/user/google-auth': {
         post: {
             tags: [
                 'User'
             ],
-            summary: 'Auth user',
+            summary: 'Google auth user',
             requestBody: {
                 content: {
                     'application/json': {
                         schema: {
                             type: 'object',
                             properties: {
-                                email: {
+                                idToken: {
                                     type: 'string'
                                 },
-                                password: {
+                                name: {
                                     type: 'password'
                                 }
                             },
                             example: {
-                                email: 'joao@provider.com',
-                                password: '123456'
+                                idToken: '110169484474386276334',
+                                name: 'Fernando Pereira'
                             }
                         }
                     }
@@ -56,30 +56,6 @@ const auth = {
                         }
                     }
                 },
-                '404': {
-                    content: {
-                        'application/json': {
-                            schema: {
-                                type: 'string',
-                                example: {
-                                    message: 'email not found'
-                                }
-                            }
-                        }
-                    }
-                },
-                '401': {
-                    content: {
-                        'application/json': {
-                            schema: {
-                                type: 'string',
-                                example: {
-                                    message: 'e-mail or password incorrect'
-                                }
-                            }
-                        }
-                    }
-                },
                 '500': {
                     content: {
                         'application/json': {
@@ -97,4 +73,4 @@ const auth = {
     }
 }
 
-export { auth }
+export { googleAuth }

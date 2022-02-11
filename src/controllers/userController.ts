@@ -126,7 +126,7 @@ const userController = {
                     }
                 }
             } else {
-                res.status(412).json({ message: 'missing id token or name'})
+                res.status(412).json({ message: 'missing arguments'})
             }
         } catch (err: any) {
             res.status(500).json({ message: err.message })
