@@ -104,6 +104,16 @@ const profilePictureController = {
         } catch (err: any) {
             res.status(500).json({ message: err.message })
         }
+    },
+
+    list: async (req: CustomRequest, res: Response): Promise<void> => {
+        try {
+            const pictures = await prisma.profile_pictures.findMany()
+
+            res.status(200).json(pictures)
+        } catch (err: any) {
+            res.status(500).json({ message: err.message })
+        }
     }
 }
 

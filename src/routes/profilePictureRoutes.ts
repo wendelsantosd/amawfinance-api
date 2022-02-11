@@ -15,4 +15,6 @@ profilePictureRoutes.post(
     profilePictureController.create
 )
 
+profilePictureRoutes.get('/profile-picture/list', verifyToken, profilePictureController.list)
+
 export default profilePictureRoutes
