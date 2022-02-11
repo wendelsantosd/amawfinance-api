@@ -20,5 +20,6 @@ userRoutes.get('/user/recover-password', userController.recoverPassword)
 userRoutes.post('/user/modify-password-by-recover/:token', userController.modifyPasswordByRecover)
 userRoutes.post('/user/modify-password', verifyToken, userController.modifyPassword)
 userRoutes.get('/user/modify-email', verifyToken, userController.modifyEmail)
+userRoutes.get('/user/alter-email/:email/:token', verifyToken, userController.alterEmail)
 
 export default userRoutes

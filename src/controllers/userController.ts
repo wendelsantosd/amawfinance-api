@@ -432,6 +432,52 @@ const userController = {
         } catch (err: any) {
             res.status(500).json({ message: err.message })
         }
+    },
+
+    alterEmail: async (req: Request, res: Response): Promise<void> => {
+        try {
+            const { email, token } = req.params
+
+            if (email && token) {
+                const { secret } = config.JWT
+                
+                verify(token, secret, async (err: any, payload: any) => {
+                    if (err) {
+                        res.status(401).json({ message: err.message })
+                    }
+
+                    const user = await prisma.users.findUnique({
+                        where: { 
+                            id: payload?.id
+                        }
+                    })
+
+                    if (user) {
+                        await prisma.users.update({
+                            where: {
+                                id: payload?.id
+                            },
+                            data: {
+                                email,
+                                confirmed_email: true,
+                                updated_at: nowLocalDate()
+                            }
+                        })
+
+                        res.status(200).json({ message: 'email altered'})
+
+                        // It Should redirect to page login
+                        // res.redirect()
+                    } else {
+                        res.status(404).json({ message: 'user not found' })
+                    }
+                })
+            } else {
+                res.status(412).json({ message: 'missing arguments' })
+            }
+        } catch (err: any) {
+            res.status(500).json({ message: err.message })
+        }
     }
 }
 
