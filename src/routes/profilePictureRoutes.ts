@@ -16,5 +16,6 @@ profilePictureRoutes.post(
 )
 profilePictureRoutes.get('/profile-picture/list', verifyToken, profilePictureController.list)
 profilePictureRoutes.get('/profile-picture/data', verifyToken, profilePictureController.data)
+profilePictureRoutes.delete('/profile-picture/delete', verifyToken, profilePictureController.delete)
 
 export default profilePictureRoutes

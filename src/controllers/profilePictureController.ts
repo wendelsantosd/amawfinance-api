@@ -143,7 +143,42 @@ const profilePictureController = {
         try {
             const { id } = req.query
 
+            if (id) {
+                const picture = await prisma.profile_pictures.findUnique({
+                    where: { id }
+                })
 
+                if (picture) {
+                    await prisma.profile_pictures.delete({
+                        where: { id }
+                    })
+
+                    res.status(200).json({ message: 'profile picture deleted' })
+
+                    if (process.env.STORAGE_TYPE === 's3') {
+                        return s3
+                            .deleteObject({
+                                Bucket: process.env.BUCKET_NAME,
+                                Key: id
+                            })
+                            .promise()
+                            .then(response => {
+                                console.log(response.status)
+                            })
+                            .catch(response => {
+                                console.log(response.status)
+                            })
+                    } else {
+                        return promisify(fs.unlink)(
+                            path.resolve(__dirname, '..', '..', 'tmp', 'uploads', picture.id)
+                        )
+                    }
+                } else {
+                    res.status(404).json({ message: 'profile picture not found' })
+                }
+            } else {
+                res.status(412).json({ message: 'missing id' })
+            }
         } catch (err: any) {
             res.status(500).json({ message: err.message })
         }

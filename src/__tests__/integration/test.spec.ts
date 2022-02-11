@@ -10,6 +10,8 @@ const id = '6150747b-46b3-41d5-a596-6bc0658b913a'
 const email = 'wendelwcsantos@gmail.com'
 const tokenAlterEmail = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNTA3NDdiLTQ2YjMtNDFkNS1hNTk2LTZiYzA2NThiOTEzYSIsImlhdCI6MTY0NDU4MjE4MiwiZXhwIjoxNjQ0NjY4NTgyfQ.kt5dDEK5OhqT96FTKJ2eEAtGPfyB33M9H25k98rOCMc'
 
+const idPicture = ''
+
 // describe('Authentication', () => {
 //     it('should be able to do login', async () => {
 //         const response = await request(app)
@@ -141,6 +143,48 @@ const tokenAlterEmail = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNTA3ND
 //     it('should be able alter email', async () => {
 //         const response = await request(app)
 //             .get(`/user/alter-email/${email}/${tokenAlterEmail}`)
+
+//         expect(response.status).toBe(200)
+//     })
+// })
+
+//TO DO
+// describe('Create a profile picture', () => {
+//     const file = {
+//         name: 'picture-example',
+//         size: 123,
+//         id: 'picture-example-id',
+//         url: 'https://www.example.com/',
+//         user_id: id,
+//         created_at: nowLocalDate(),
+//         updated_at: nowLocalDate()
+//     }
+
+//     it('should be able to create a user', async () => {
+//         const response = await request(app)
+//             .post(`/user/profile-picture/create?id=${id}`)
+//             .set('Authorization', `Bearer ${token}`)
+//             .send(file)
+        
+//         expect(response.status).toBe(201)
+//     })
+// })
+
+// describe('Data profile picture', () => {
+//     it('should be able to get a profile picture', async () => {
+//         const response = await request(app)
+//             .get(`/profile-picture/data?id=${idPicture}`)
+//             .set('Authorization', `Bearer ${token}`)
+
+//         expect(response.status).toBe(200)
+//     })
+// })
+
+// describe('Delete profile picture', () => {
+//     it('should be able to delete a profile picture', async () => {
+//         const response = await request(app)
+//             .delete(`/profile-picture/delete?id=${idPicture}`)
+//             .set('Authorization', `Bearer ${token}`)
 
 //         expect(response.status).toBe(200)
 //     })
