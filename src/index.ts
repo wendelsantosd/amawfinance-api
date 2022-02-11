@@ -5,6 +5,7 @@ import { serve, setup } from 'swagger-ui-express'
 
 import { config }  from './config'
 import { swagger } from './docs'
+import profilePictureRoutes from './routes/profilePictureRoutes'
 import userRoutes from './routes/userRoutes'
 
 
@@ -17,6 +18,7 @@ app.use(json())
 app.use(urlencoded({ extended: true}))
 app.use(morgan('dev'))
 app.use(userRoutes)
+app.use(profilePictureRoutes)
 
 app.use('/documentation', serve, setup(swagger))
 
