@@ -383,6 +383,55 @@ const userController = {
         } catch (err: any) {
             res.status(500).json({ message: err.message })
         }
+    },
+
+    modifyEmail: async (req: CustomRequest, res: Response): Promise<void> => {
+        try {
+            const { user } = req
+            const { id, email } = req.query
+
+            if (id) {
+                if (user?.access_level === 'admin' || user?.id === id) {
+                    const targetUser = await prisma.users.findUnique({
+                        where: { id }
+                    })
+
+                    if (targetUser) {
+                        const emailAlreadyExists = await prisma.users.findUnique({
+                            where: { email }
+                        })
+
+                        if (!emailAlreadyExists) {
+                            const { secret } = config.JWT
+
+                            const token = sign(
+                                {
+                                    id: targetUser.id
+                                },
+                                secret,
+                                {
+                                    expiresIn: '1d'
+                                }
+                            )
+
+                            sendEmail(email, token, 'modifyEmail')
+
+                            res.status(200).json({ message: 'email sent' })
+                        } else {
+                            res.status(400).json({ message: 'email already exists' })
+                        }
+                    } else {
+                        res.status(404).json({ message: 'target user not found'})
+                    }
+                } else {
+                    res.status(401).json({ message: 'unauthorized' })
+                }
+            } else {
+                res.status(412).json({ message: 'missing arguments' })
+            }
+        } catch (err: any) {
+            res.status(500).json({ message: err.message })
+        }
     }
 }
 
