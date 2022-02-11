@@ -14,7 +14,7 @@ profilePictureRoutes.post(
     multer(multerConfig).single('file'),
     profilePictureController.create
 )
-
 profilePictureRoutes.get('/profile-picture/list', verifyToken, profilePictureController.list)
+profilePictureRoutes.get('/profile-picture/data', verifyToken, profilePictureController.data)
 
 export default profilePictureRoutes

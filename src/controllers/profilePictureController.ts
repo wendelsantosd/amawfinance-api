@@ -114,6 +114,24 @@ const profilePictureController = {
         } catch (err: any) {
             res.status(500).json({ message: err.message })
         }
+    },
+
+    data: async (req: CustomRequest, res: Response): Promise<void> => {
+        try {
+            const { id } = req.query
+
+            const profilePicture = await prisma.profile_pictures.findUnique({
+                where: { id }
+            })
+
+            if (profilePicture) {
+                res.status(200).json(profilePicture)
+            } else {
+                res.status(404).json({ message: 'profile picture not found' })
+            }
+        } catch (err: any) {
+            res.status(500).json({ message: err.message })
+        }
     }
 }
 
