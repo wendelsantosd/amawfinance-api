@@ -68,6 +68,18 @@ const data = {
                         }
                     }
                 },
+                '412': {
+                    content: {
+                        'application/json': {
+                            schema: {
+                                type: 'string',
+                                example: {
+                                    message: 'missing id'
+                                }
+                            }
+                        }
+                    }
+                },
                 '500': {
                     content: {
                         'application/json': {
