@@ -5,6 +5,11 @@ const data = {
                 'Profile Picture'
             ],
             summary: 'Get a profile picture',
+            security: [
+                {
+                    bearerAuth: []
+                }
+            ],
             parameters: [
                 {
                     in: 'query',

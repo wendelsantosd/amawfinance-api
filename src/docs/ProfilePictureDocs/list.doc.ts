@@ -5,6 +5,11 @@ const list = {
                 'Profile Picture'
             ],
             summary: 'List profile pictures',
+            security: [
+                {
+                    bearerAuth: []
+                }
+            ],
             responses: {
                 '200': {
                     content: {
