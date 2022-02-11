@@ -1,20 +1,20 @@
-const modifyEmail = {
-    '/user/modify-email': {
+const alterEmail = {
+    '/user/alter-email/:email/:token': {
         get: {
             tags: [
                 'User'
             ],
-            summary: 'Modify email user',
+            summary: 'Alter email user',
             parameters: [
                 {
-                    in: 'query',
+                    in: 'path',
                     name: 'email',
                     required: 'true',
                     type: 'string'
                 },
                 {
-                    in: 'query',
-                    name: 'id',
+                    in: 'path',
+                    name: 'token',
                     required: 'true',
                     type: 'string'
                 }
@@ -26,7 +26,7 @@ const modifyEmail = {
                             schema: {
                                 type: 'string',
                                 example: {
-                                    message: 'email sent'
+                                    message: 'email altered'
                                 }
                             }
                         }
@@ -50,19 +50,7 @@ const modifyEmail = {
                             schema: {
                                 type: 'string',
                                 example: {
-                                    message: 'missing token'
-                                }
-                            }
-                        }
-                    }
-                },
-                '400': {
-                    content: {
-                        'application/json': {
-                            schema: {
-                                type: 'string',
-                                example: {
-                                    message: 'email already exists'
+                                    message: 'missing arguments'
                                 }
                             }
                         }
@@ -85,4 +73,4 @@ const modifyEmail = {
     }
 }
 
-export { modifyEmail }
+export { alterEmail }
