@@ -1,4 +1,5 @@
 import { version, description } from '../../package.json'
+import { ProfilePictureDocs } from './ProfilePictureDocs'
 import { UserControllerDocs } from './userControllerDocs'
 
 
@@ -13,7 +14,8 @@ const swagger = {
         }
     },
     paths: {
-        ...UserControllerDocs
+        ...UserControllerDocs,
+        ...ProfilePictureDocs
     },
     components: {
         securitySchemes: {
