@@ -7,6 +7,9 @@ const tokenConfirmEmail = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxZjhm
 const tokenModifyPassword = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNTA3NDdiLTQ2YjMtNDFkNS1hNTk2LTZiYzA2NThiOTEzYSIsImlhdCI6MTY0NDUyNTAzMywiZXhwIjoxNjQ0NjExNDMzfQ.GgtslVhMqMNznQjLztJLxSZNk2ZsdElweAaZnsngNfs'
 const id = '6150747b-46b3-41d5-a596-6bc0658b913a'
 
+const email = 'wendelwcsantos@gmail.com'
+const tokenAlterEmail = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNTA3NDdiLTQ2YjMtNDFkNS1hNTk2LTZiYzA2NThiOTEzYSIsImlhdCI6MTY0NDU4MjE4MiwiZXhwIjoxNjQ0NjY4NTgyfQ.kt5dDEK5OhqT96FTKJ2eEAtGPfyB33M9H25k98rOCMc'
+
 // describe('Authentication', () => {
 //     it('should be able to do login', async () => {
 //         const response = await request(app)
@@ -125,11 +128,20 @@ const id = '6150747b-46b3-41d5-a596-6bc0658b913a'
 //     })
 // })
 
-describe('Modify Email', () => {
-    it('should be able sent a email for confirm email', async () => {
-        const response = await request(app)
-            .get(`/user/recover-password?email=admin@provider.com&id=${id}`)
+// describe('Modify Email', () => {
+//     it('should be able sent a email for confirm email', async () => {
+//         const response = await request(app)
+//             .get(`/user/recover-password?email=admin@provider.com&id=${id}`)
 
-        expect(response.status).toBe(200)
-    })
-})
+//         expect(response.status).toBe(200)
+//     })
+// })
+
+// describe('Alter email', () => {
+//     it('should be able alter email', async () => {
+//         const response = await request(app)
+//             .get(`/user/alter-email/${email}/${tokenAlterEmail}`)
+
+//         expect(response.status).toBe(200)
+//     })
+// })
