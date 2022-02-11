@@ -14,7 +14,17 @@ type MulterConfig = MulterConfig & Options & {
     fileFilter: ( req: Request, file: Express.Multer.File, cb: FileFilterCallback) => void
 }
 
+type CustomPictureProfileRequest = CustomRequest & {
+    file: {
+        originalname: string
+        size: number
+        key: string
+        location: string
+    }
+}
+
 export {
     CustomRequest,
-    MulterConfig
+    MulterConfig,
+    CustomPictureProfileRequest
 }
