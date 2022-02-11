@@ -5,6 +5,16 @@ type CustomRequest = Request & JwtPayload & {
     } | undefined
 }
 
+type MulterConfig = MulterConfig & Options & {
+    dest: string
+    storage: multer.StorageEngine
+    limits: {
+        fileSize: number
+    }
+    fileFilter: ( req: Request, file: Express.Multer.File, cb: FileFilterCallback) => void
+}
+
 export {
-    CustomRequest
+    CustomRequest,
+    MulterConfig
 }
