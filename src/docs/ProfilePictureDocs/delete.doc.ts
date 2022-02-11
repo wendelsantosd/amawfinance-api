@@ -1,10 +1,10 @@
-const create = {
-    '/profile-picture/create': {
-        post: {
+const _delete = {
+    '/profile-picture/delete': {
+        delete: {
             tags: [
                 'Profile Picture'
             ],
-            summary: 'Create profile picture',
+            summary: 'Profile picture delete',
             security: [
                 {
                     bearerAuth: []
@@ -19,23 +19,26 @@ const create = {
                     description: 'id'
                 }
             ],
-            requestBody: {
-                content: {
-                    image: {
-                        schema: {
-                            type: 'file'
-                        }
-                    }
-                }
-            },
             responses: {
-                '201': {
+                '200': {
                     content: {
                         'application/json': {
                             schema: {
                                 type: 'string',
                                 example: {
-                                    message: 'profile picture created'
+                                    message: 'profile picture deleted'
+                                }
+                            }
+                        }
+                    }
+                },
+                '404': {
+                    content: {
+                        'application/json': {
+                            schema: {
+                                type: 'string',
+                                example: {
+                                    message: 'profile picture not found'
                                 }
                             }
                         }
@@ -48,18 +51,6 @@ const create = {
                                 type: 'string',
                                 example: {
                                     message: 'could not access'
-                                }
-                            }
-                        }
-                    }
-                },
-                '404': {
-                    content: {
-                        'application/json': {
-                            schema: {
-                                type: 'string',
-                                example: {
-                                    message: 'user not found'
                                 }
                             }
                         }
@@ -83,7 +74,7 @@ const create = {
                             schema: {
                                 type: 'string',
                                 example: {
-                                    message: '<<error message>>'
+                                    message: '<error message>'
                                 }
                             }
                         }
@@ -94,4 +85,4 @@ const create = {
     }
 }
 
-export { create }
+export { _delete }
