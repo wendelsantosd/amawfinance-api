@@ -124,3 +124,12 @@ const id = '6150747b-46b3-41d5-a596-6bc0658b913a'
 //         expect(response.status).toBe(200)
 //     })
 // })
+
+describe('Modify Email', () => {
+    it('should be able sent a email for confirm email', async () => {
+        const response = await request(app)
+            .get(`/user/recover-password?email=admin@provider.com&id=${id}`)
+
+        expect(response.status).toBe(200)
+    })
+})
