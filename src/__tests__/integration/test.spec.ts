@@ -227,18 +227,28 @@ const idTransaction = '6ae96462-0238-4dfb-87b0-006f2c68d197'
 //     })
 // })
 
-describe('Update a transaction', () => {
-    it('should be able to update a transaction', async () => {
+// describe('Update a transaction', () => {
+//     it('should be able to update a transaction', async () => {
+//         const response = await request(app)
+//             .put(`/transaction/update?id=${idTransaction}&userId=${id}`)
+//             .set('Authorization', `Bearer ${token}`)
+//             .send({
+//                 description: 'Compras',
+//                 amount: 500,
+//                 type: 'expense',
+//                 date: nowLocalDate(),
+//                 updated_at: nowLocalDate()
+//             })
+        
+//         expect(response.status).toBe(200)
+//     })
+// })
+
+describe('Delete a transaction', () => {
+    it('should be able to delete a transaction', async () => {
         const response = await request(app)
-            .put(`/transaction/update?id=${idTransaction}&userId=${id}`)
+            .delete(`/transaction/delete?id=${idTransaction}&userId=${id}`)
             .set('Authorization', `Bearer ${token}`)
-            .send({
-                description: 'Compras',
-                amount: 500,
-                type: 'expense',
-                date: nowLocalDate(),
-                updated_at: nowLocalDate()
-            })
         
         expect(response.status).toBe(200)
     })
