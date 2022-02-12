@@ -30,6 +30,22 @@ const transactionController = {
         } catch (err: any) {
             res.status(500).json({ message: err.message })
         }
+    },
+
+    list: async (req: CustomRequest, res: Response): Promise<void> => {
+        try {
+            const { user } = req
+
+            if (user?.access_level === 'admin') {
+                const transactions = await prisma.transactions.findMany()
+
+                res.status(200).json(transactions)
+            } else {
+                res.status(403).json({ message: 'could not access' })
+            }
+        } catch (err: any) {
+            res.status(500).json({ message: err.message })
+        }
     }
 }
 

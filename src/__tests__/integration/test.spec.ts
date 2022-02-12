@@ -190,18 +190,18 @@ const idPicture = ''
 //     })
 // })
 
-describe('Create transaction', () => {
-    it('should be able to create a transaction', async () => {
-        const response = await request(app)
-            .post(`/transaction/create?id=${id}`)
-            .send({
-                description: 'Aluguel',
-                amount: 300.50,
-                type: 'expense',
-                date: '2022-02-10T14:50:09.383Z'
-            })
-            .set('Authorization', `Bearer ${token}`)
+// describe('Create transaction', () => {
+//     it('should be able to create a transaction', async () => {
+//         const response = await request(app)
+//             .post(`/transaction/create?id=${id}`)
+//             .send({
+//                 description: 'Aluguel',
+//                 amount: 300.50,
+//                 type: 'expense',
+//                 date: '2022-02-10T14:50:09.383Z'
+//             })
+//             .set('Authorization', `Bearer ${token}`)
         
-        expect(response.status).toBe(201)
-    })
-})
+//         expect(response.status).toBe(201)
+//     })
+// })
