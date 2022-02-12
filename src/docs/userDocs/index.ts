@@ -12,7 +12,7 @@ import { modifyPasswordByRecover } from './modifyPasswordByRecover.doc'
 import { recoverPassword } from './recoverPassword.doc'
 import { update } from './update.doc'
 
-const UserControllerDocs = { 
+const userDocs = { 
     ...auth,
     ...create,
     ...list,
@@ -28,4 +28,4 @@ const UserControllerDocs = {
     ...googleAuth
 }
 
-export { UserControllerDocs}
+export { userDocs}

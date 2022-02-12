@@ -1,6 +1,7 @@
 import { version, description } from '../../package.json'
-import { ProfilePictureDocs } from './ProfilePictureDocs'
-import { UserControllerDocs } from './userControllerDocs'
+import { profilePictureDocs } from './profilePictureDocs'
+import { transactionDocs } from './transactionDocs'
+import { userDocs } from './userDocs'
 
 
 const swagger = {
@@ -14,8 +15,9 @@ const swagger = {
         }
     },
     paths: {
-        ...UserControllerDocs,
-        ...ProfilePictureDocs
+        ...userDocs,
+        ...profilePictureDocs,
+        ...transactionDocs
     },
     components: {
         securitySchemes: {
