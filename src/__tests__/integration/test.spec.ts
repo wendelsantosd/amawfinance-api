@@ -6,12 +6,13 @@ const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM0ZmQxNmE4LTlmOTkt
 const tokenClient = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRhYWZiODFlLTIwN2EtNGU3Yy1hMzE5LWU4YzcwYjJjNWNhYiIsImFjY2Vzc19sZXZlbCI6ImNsaWVudCIsImlhdCI6MTY0NDY2OTk1NSwiZXhwIjoxNjQ1NTMzOTU1fQ.cA9tYiSXP692BzmQ7J0rvRGtfYJKIyfKLYYHHo5eFmw'
 const tokenConfirmEmail = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxZjhmMTZmLTE0YWMtNDRlOC1hOGM0LWIwYzA0YzcyNjBiOCIsImlhdCI6MTY0NDUyMTE1NywiZXhwIjoxNjQ0NjA3NTU3fQ.u5dFik1PFbsOTqIuiJoWUNmk49C9MDL75f1bWJJ1obg'
 const tokenModifyPassword = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNTA3NDdiLTQ2YjMtNDFkNS1hNTk2LTZiYzA2NThiOTEzYSIsImlhdCI6MTY0NDUyNTAzMywiZXhwIjoxNjQ0NjExNDMzfQ.GgtslVhMqMNznQjLztJLxSZNk2ZsdElweAaZnsngNfs'
-const id = '6150747b-46b3-41d5-a596-6bc0658b913a'
+const id = 'daafb81e-207a-4e7c-a319-e8c70b2c5cab'
 
 const email = 'wendelwcsantos@gmail.com'
 const tokenAlterEmail = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNTA3NDdiLTQ2YjMtNDFkNS1hNTk2LTZiYzA2NThiOTEzYSIsImlhdCI6MTY0NDU4MjE4MiwiZXhwIjoxNjQ0NjY4NTgyfQ.kt5dDEK5OhqT96FTKJ2eEAtGPfyB33M9H25k98rOCMc'
 
 const idPicture = ''
+const idTransaction = '6ae96462-0238-4dfb-87b0-006f2c68d197'
 
 // describe('Authentication', () => {
 //     it('should be able to do login', async () => {
@@ -207,20 +208,38 @@ const idPicture = ''
 //     })
 // })
 
-describe('List transaction', () => {
-    it('should be able to list transactions', async () => {
+// describe('List transaction', () => {
+//     it('should be able to list transactions', async () => {
+//         const response = await request(app)
+//             .get('/transaction/list')
+//             .set('Authorization', `Bearer ${token}`)
+        
+//         expect(response.status).toBe(200)
+//     })
+
+//     it('should not be able to list transactions', async () => {
+//         const response = await request(app)
+//             .get('/transaction/list')
+//             .set('Authorization', `Bearer ${tokenClient}`)
+        
+//         expect(response.status).toBe(403)
+//     })
+// })
+
+describe('Get a transaction', () => {
+    it('should be able to get a transaction', async () => {
         const response = await request(app)
-            .get('/transaction/list')
+            .get(`/transaction/data?id=${idTransaction}&userId=${id}`)
             .set('Authorization', `Bearer ${token}`)
         
         expect(response.status).toBe(200)
     })
 
-    it('should not be able to list transactions', async () => {
+    it('should be able to get a transaction', async () => {
         const response = await request(app)
-            .get('/transaction/list')
+            .get(`/transaction/data?id=${idTransaction}&userId=${id}`)
             .set('Authorization', `Bearer ${tokenClient}`)
         
-        expect(response.status).toBe(403)
+        expect(response.status).toBe(200)
     })
 })
