@@ -3,6 +3,7 @@ import request from 'supertest'
 import { app } from '../../index'
 
 const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM0ZmQxNmE4LTlmOTktNDhhMS04ZDA3LWVmZjdlMzBlMzQxNyIsImFjY2Vzc19sZXZlbCI6ImFkbWluIiwiaWF0IjoxNjQ0NTEzNTYxLCJleHAiOjE2NDUzNzc1NjF9._QT-mYTZZpKND-Chh3xgjdN5O3A9EwLUj5liSDqKMns'
+const tokenClient = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRhYWZiODFlLTIwN2EtNGU3Yy1hMzE5LWU4YzcwYjJjNWNhYiIsImFjY2Vzc19sZXZlbCI6ImNsaWVudCIsImlhdCI6MTY0NDY2OTk1NSwiZXhwIjoxNjQ1NTMzOTU1fQ.cA9tYiSXP692BzmQ7J0rvRGtfYJKIyfKLYYHHo5eFmw'
 const tokenConfirmEmail = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxZjhmMTZmLTE0YWMtNDRlOC1hOGM0LWIwYzA0YzcyNjBiOCIsImlhdCI6MTY0NDUyMTE1NywiZXhwIjoxNjQ0NjA3NTU3fQ.u5dFik1PFbsOTqIuiJoWUNmk49C9MDL75f1bWJJ1obg'
 const tokenModifyPassword = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNTA3NDdiLTQ2YjMtNDFkNS1hNTk2LTZiYzA2NThiOTEzYSIsImlhdCI6MTY0NDUyNTAzMywiZXhwIjoxNjQ0NjExNDMzfQ.GgtslVhMqMNznQjLztJLxSZNk2ZsdElweAaZnsngNfs'
 const id = '6150747b-46b3-41d5-a596-6bc0658b913a'
@@ -205,3 +206,21 @@ const idPicture = ''
 //         expect(response.status).toBe(201)
 //     })
 // })
+
+describe('List transaction', () => {
+    it('should be able to list transactions', async () => {
+        const response = await request(app)
+            .get('/transaction/list')
+            .set('Authorization', `Bearer ${token}`)
+        
+        expect(response.status).toBe(200)
+    })
+
+    it('should not be able to list transactions', async () => {
+        const response = await request(app)
+            .get('/transaction/list')
+            .set('Authorization', `Bearer ${tokenClient}`)
+        
+        expect(response.status).toBe(403)
+    })
+})
