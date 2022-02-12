@@ -73,6 +73,43 @@ const transactionController = {
         } catch (err: any) {
             res.status(500).json({ message: err.message })
         }
+    },
+
+    update: async (req: CustomRequest, res: Response): Promise<void> => {
+        try {
+            const { user } = req
+            const { id, userId } = req.query
+
+            if (id && userId) {
+                if (user?.access_level === 'admin' || user?.id === userId) {
+                    const transaction = await prisma.transactions.findUnique({
+                        where: { id }
+                    })
+
+                    if (transaction) {
+                        const data = { ...req.body }
+
+                        delete data.userId
+                        data.updated_at = nowLocalDate()
+
+                        await prisma.transactions.update({
+                            where: { id },
+                            data
+                        })
+
+                        res.status(200).json({ message: 'transaction updated' })
+                    } else {
+                        res.status(404).json({ message: 'transaction not found' })
+                    }
+                } else {
+                    res.status(403).json({ message: 'could not access'})
+                }
+            } else {
+                res.status(412).json({ message: 'missing arguments' })
+            }
+        } catch (err: any) {
+            res.status(500).json({ message: err.message})
+        }
     }
 }
 
