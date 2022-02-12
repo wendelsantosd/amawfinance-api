@@ -1,6 +1,7 @@
 import request from 'supertest'
 
 import { app } from '../../index'
+import { nowLocalDate } from '../../provider/nowLocalDate'
 
 const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM0ZmQxNmE4LTlmOTktNDhhMS04ZDA3LWVmZjdlMzBlMzQxNyIsImFjY2Vzc19sZXZlbCI6ImFkbWluIiwiaWF0IjoxNjQ0NTEzNTYxLCJleHAiOjE2NDUzNzc1NjF9._QT-mYTZZpKND-Chh3xgjdN5O3A9EwLUj5liSDqKMns'
 const tokenClient = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRhYWZiODFlLTIwN2EtNGU3Yy1hMzE5LWU4YzcwYjJjNWNhYiIsImFjY2Vzc19sZXZlbCI6ImNsaWVudCIsImlhdCI6MTY0NDY2OTk1NSwiZXhwIjoxNjQ1NTMzOTU1fQ.cA9tYiSXP692BzmQ7J0rvRGtfYJKIyfKLYYHHo5eFmw'
@@ -226,19 +227,18 @@ const idTransaction = '6ae96462-0238-4dfb-87b0-006f2c68d197'
 //     })
 // })
 
-describe('Get a transaction', () => {
-    it('should be able to get a transaction', async () => {
+describe('Update a transaction', () => {
+    it('should be able to update a transaction', async () => {
         const response = await request(app)
-            .get(`/transaction/data?id=${idTransaction}&userId=${id}`)
+            .put(`/transaction/update?id=${idTransaction}&userId=${id}`)
             .set('Authorization', `Bearer ${token}`)
-        
-        expect(response.status).toBe(200)
-    })
-
-    it('should be able to get a transaction', async () => {
-        const response = await request(app)
-            .get(`/transaction/data?id=${idTransaction}&userId=${id}`)
-            .set('Authorization', `Bearer ${tokenClient}`)
+            .send({
+                description: 'Compras',
+                amount: 500,
+                type: 'expense',
+                date: nowLocalDate(),
+                updated_at: nowLocalDate()
+            })
         
         expect(response.status).toBe(200)
     })
