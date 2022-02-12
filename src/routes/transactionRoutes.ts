@@ -9,5 +9,6 @@ transactionRoutes.post('/transaction/create', verifyToken, transactionController
 transactionRoutes.get('/transaction/list', verifyToken, transactionController.list)
 transactionRoutes.get('/transaction/data', verifyToken, transactionController.data)
 transactionRoutes.put('/transaction/update', verifyToken, transactionController.update)
+transactionRoutes.delete('/transaction/delete', verifyToken, transactionController.delete)
 
 export default transactionRoutes
