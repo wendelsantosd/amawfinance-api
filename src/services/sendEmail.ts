@@ -7,17 +7,14 @@ const sendEmail = async (to: string, token: string, type: string): Promise<void>
     const { user, pass } = config.NODEMAILER
     let emailOptions = {}
     let url = ''
-    let message =''
+    const from = 'Amaw Finance'
 
     if (type === 'confirmEmail') {
         url = `http://localhost:3333/user/confirm-email/${token}`
-        message = 'confirmar seu e-mail'
     } else if (type === 'recoverPassword') {
         url = `http://localhost:3000/modify-password/${token}`
-        message = 'confirmar sua senha'
     } else if (type === 'modifyEmail') {
         url = `http://localhost:3333/user/alter-email/${to}/${token}`
-        message = 'confirmar seu e-mail'
     }
 
     const transporter = createTransport(
@@ -33,21 +30,63 @@ const sendEmail = async (to: string, token: string, type: string): Promise<void>
 
     if (type === 'welcome') {
         emailOptions = {
-            from: user,
+            from,
             to,
-            subject: message,
-            html: '<p>Seja bem vindo a plataforma acadêmica Amaw.<p>'
+            subject: 'Seja bem vindo a Amaw Finance',
+            html: `
+                    <body>
+                        <div>
+                            <p>Seja bem vindo a plataforma Amaw Finance.</p>
+                            <p>Tenha total controle das suas finanças.</p>
+                        </div>
+                    </body>
+                `
         }
-    } else {
+    } else if (type === 'confirmEmail'){
         emailOptions = {
-            from: user,
+            from,
             to,
-            subject: 'Seja bem vindo',
-            html: `Por favor, clique no link para ${message}:<a href=${url}>${url}</a>`
+            subject: 'Seja bem vindo a Amaw Finance',
+            html: `
+                    <body>
+                        <div>
+                            <p>Seja bem vindo a plataforma Amaw Finance.</p>
+                            <p>Tenha total controle das suas finanças.</p>
+                            <p>Agora você só precisa confirmar seu e-mail.</p> 
+                            <a href=${url}>Clique aqui.</a>
+                        </div>
+                    </body>
+                `
+        }
+    } else if (type === 'modifyEmail'){
+        emailOptions = {
+            from,
+            to,
+            subject: 'Solitação de Alteração de E-mail',
+            html: `
+                    <body>
+                        <div>
+                            <p>Você precisa confirmar este e-mail para alterar o e-mail atual.</p> 
+                            <a href=${url}>Clique aqui.</a>
+                        </div>
+                    </body>
+                `
+        }
+    } else if (type === 'recoverPassword'){
+        emailOptions = {
+            from,
+            to,
+            subject: 'Solitação de Recuperação de Senha',
+            html: `
+                    <body>
+                        <div>
+                            <p>Modifique sua senha.</p> 
+                            <a href=${url}>Clique aqui.</a>
+                        </div>
+                    </body>
+                `
         }
     }
-
-    
 
     transporter.sendMail(emailOptions, (err, payload) => {
         if (err) {
