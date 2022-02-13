@@ -3,6 +3,7 @@ import { create } from './create.doc'
 import { data } from './data.doc'
 import { _delete } from './delete.doc'
 import { list } from './list.doc'
+import { listByUserMonthYear } from './listByUserMonthYear.doc'
 import { update } from './update.doc'
 
 const transactionDocs = { 
@@ -10,7 +11,8 @@ const transactionDocs = {
     ...list,
     ...data,
     ...update,
-    ..._delete
+    ..._delete,
+    ...listByUserMonthYear
 }
 
 export { transactionDocs }

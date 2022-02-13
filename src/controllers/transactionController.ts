@@ -171,6 +171,7 @@ const transactionController = {
                             ]
                         },
                         select: {
+                            id: true,
                             description: true,
                             amount: true,
                             type: true,
