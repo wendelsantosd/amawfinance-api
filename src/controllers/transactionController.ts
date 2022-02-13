@@ -14,7 +14,13 @@ const transactionController = {
 
             if (id) {
                 if (user?.access_level === 'admin' || user?.id === id) {
+
+                    const month = new Date(data.date).getMonth()
+                    const year = new Date(data.date).getFullYear()
+
                     data.user_id = id
+                    data.month = month
+                    data.year = year
                     data.created_at = nowLocalDate()
                     data.updated_at = nowLocalDate()
 
