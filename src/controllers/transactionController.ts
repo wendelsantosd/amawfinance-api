@@ -147,6 +147,47 @@ const transactionController = {
         } catch (err: any) {
             res.status(500).json({ message: err.message })
         }
+    },
+
+    listByUserMonthYear: async (req: CustomRequest, res: Response): Promise<void> => {
+        try {
+            const { user } = req
+            const { id, month, year } = req.query
+
+            if (id && month && year) {
+                if (user?.access_level === 'admin' || user?.id === id) {
+                    const transactions = await prisma.transactions.findMany({
+                        where: {
+                            AND: [
+                                {
+                                    user_id: id
+                                },
+                                { 
+                                    month: parseInt(month)
+                                },
+                                { 
+                                    year: parseInt(year)
+                                }
+                            ]
+                        },
+                        select: {
+                            description: true,
+                            amount: true,
+                            type: true,
+                            date: true
+                        }
+                    })
+
+                    res.status(200).json(transactions)
+                } else {
+                    res.status(403).json({ message: 'could not access' })
+                }
+            } else {
+                res.status(412).json({ message: 'missing arguments' })
+            }
+        } catch (err: any) {
+            res.status(500).json({ message: err.message })
+        }
     }
 }
 
