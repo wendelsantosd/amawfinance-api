@@ -191,7 +191,7 @@ const userController = {
         try {
             const { user } = req
             const { id } = req.query
-            console.log(user)
+            
             if (id) {
                 if (user?.access_level ==='admin' || user?.id === id) {
                     const targetUser = await prisma.users.findUnique({
