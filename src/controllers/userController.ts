@@ -15,7 +15,7 @@ import { CustomRequest } from '../types'
 const userController = {
     auth: async (req: Request, res: Response): Promise<void> => {
         try {
-            const { email, password } = req.body
+            const { email, password } = req.query
 
             if (email && password) {
                 const user = await prisma.users.findUnique({
@@ -49,7 +49,7 @@ const userController = {
                                 token,
                                 id: user.id
                             })
-                            
+
                         } else {
                             res.status(401).json({ message: 'email or password incorrect' })
                         }
