@@ -45,7 +45,11 @@ const userController = {
                                 }
                             )
 
-                            res.status(200).json(token)
+                            res.status(200).json({
+                                token,
+                                id: user.id
+                            })
+                            
                         } else {
                             res.status(401).json({ message: 'email or password incorrect' })
                         }
