@@ -47,6 +47,18 @@ const create = {
                         }
                     }
                 },
+                '400': {
+                    content: {
+                        'application/json': {
+                            schema: {
+                                type: 'string',
+                                example: {
+                                    message: 'e-mail already exists'
+                                }
+                            }
+                        }
+                    }
+                },
                 '500': {
                     content: {
                         'application/json': {

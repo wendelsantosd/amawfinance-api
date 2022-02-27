@@ -35,10 +35,14 @@ const googleAuth = {
                                 properties: {
                                     token: {
                                         type: 'string'
+                                    },
+                                    id: {
+                                        type: 'string'
                                     }
                                 },
                                 example: {
-                                    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0ODkwIiwibmFtZSI6IkpvZ2ZnZmhuIERvZSIsImlhdCI6MTUxNjIzOTAyMn0.GARIyo2w6ZcuniX26kpmMgCmBTp5TX_6tjm2tFMkbRU'
+                                    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0ODkwIiwibmFtZSI6IkpvZ2ZnZmhuIERvZSIsImlhdCI6MTUxNjIzOTAyMn0.GARIyo2w6ZcuniX26kpmMgCmBTp5TX_6tjm2tFMkbRU',
+                                    id: 'ced139f5-b9c7-4b0e-a3df-446a4925eb5e'
                                 }
                             }
                         }
