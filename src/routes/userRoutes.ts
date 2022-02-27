@@ -10,6 +10,7 @@ userRoutes.get('/', (req: Request, res: Response): void => {
 })
 
 userRoutes.get('/user/auth', userController.auth)
+userRoutes.get('/user/google-auth', userController.googleAuth)
 userRoutes.post('/user/create', userController.create)
 userRoutes.get('/user/list', verifyToken, userController.list)
 userRoutes.get('/user/data', verifyToken, userController.data)
@@ -21,6 +22,5 @@ userRoutes.post('/user/modify-password-by-recover/:token', userController.modify
 userRoutes.post('/user/modify-password', verifyToken, userController.modifyPassword)
 userRoutes.get('/user/modify-email', verifyToken, userController.modifyEmail)
 userRoutes.get('/user/alter-email/:email/:token', userController.alterEmail)
-userRoutes.post('/user/google-auth', userController.googleAuth)
 
 export default userRoutes

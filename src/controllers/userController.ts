@@ -69,8 +69,8 @@ const userController = {
 
     googleAuth: async( req: Request, res: Response): Promise<void> => {
         try {
-            const idToken: any = req.body?.idToken
-            const name: any = req.body?.name
+            const idToken: any = req.query?.idToken
+            const name: any = req.query?.name
             
             if (idToken && name) {
                 const { email }: any = await verifyIdGoogleToken(idToken).catch(err =>
@@ -94,7 +94,10 @@ const userController = {
                         }
                     )
 
-                    res.status(200).json({ token })
+                    res.status(200).json({ 
+                        token,
+                        id: alreadyExistsUser.id 
+                    })
                 } else {
                     const password = createHash('md5').update('jUghayq&2619(&hjsk@').digest('hex')
                     
@@ -126,7 +129,10 @@ const userController = {
                             }
                         )
 
-                        res.status(200).json({ token })
+                        res.status(200).json({ 
+                            token,
+                            id: user.id
+                        })
                     }
                 }
             } else {
