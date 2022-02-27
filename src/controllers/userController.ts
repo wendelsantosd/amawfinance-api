@@ -1,6 +1,6 @@
 import {hash, compare } from 'bcrypt'
 import { createHash } from 'crypto'
-import { Request, Response } from 'express'
+import { json, Request, Response } from 'express'
 import { sign, verify } from 'jsonwebtoken'
 
 
@@ -147,36 +147,48 @@ const userController = {
         try {
             const data = { ...req.body }
 
-            const { password } = data
+            const emailAlreadyExists = await prisma.users.findUnique({
+                where: {
+                    email: data.email
+                }
+            })
+
+            if (!emailAlreadyExists) {
+                const { password } = data
     
-            const hashedPassword = await hash(password, 8)
+                const hashedPassword = await hash(password, 8)
 
-            data.password = hashedPassword
-            data.access_level = 'client'
-            data.created_at = nowLocalDate()
-            data.updated_at = nowLocalDate()
+                data.password = hashedPassword
+                data.access_level = 'client'
+                data.created_at = nowLocalDate()
+                data.updated_at = nowLocalDate()
 
-            delete data?.confirmed_email
+                delete data?.confirmed_email
 
-            const userCreated = await prisma.users.create({data})
+                const userCreated = await prisma.users.create({data})
 
-            if (userCreated) {
-                const { secret } = config.JWT
-                const { email } = userCreated
+                if (userCreated) {
+                    const { secret } = config.JWT
+                    const { email } = userCreated
 
-                const token = sign(
-                    {
-                        id: userCreated.id
-                    },
-                    secret,
-                    {
-                        expiresIn: '1d'
-                    }
-                )
+                    const token = sign(
+                        {
+                            id: userCreated.id
+                        },
+                        secret,
+                        {
+                            expiresIn: '1d'
+                        }
+                    )
 
-                sendEmail(email, token, 'confirmEmail')
+                    sendEmail(email, token, 'confirmEmail')
 
-                res.status(201).json({ message: 'user created' })
+                    res.status(201).json({ message: 'user created' })
+                }
+            } else {
+                res.status(400).json({
+                    message: 'e-mail already exists'
+                })
             }
         } catch (err: any) {
             res.status(500).json({ message: err.messages})
