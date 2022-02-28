@@ -12,7 +12,7 @@ const sendEmail = async (to: string, token: string, type: string): Promise<void>
     if (type === 'confirmEmail') {
         url = `http://localhost:3333/user/confirm-email/${token}`
     } else if (type === 'recoverPassword') {
-        url = `http://localhost:3000/modify-password/${token}`
+        url = `http://localhost:3000/alter-password/${token}`
     } else if (type === 'modifyEmail') {
         url = `http://localhost:3333/user/alter-email/${to}/${token}`
     }
