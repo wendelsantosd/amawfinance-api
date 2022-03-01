@@ -147,12 +147,16 @@ const profilePictureController = {
             if (id) {
                 if (user?.access_level === 'admin' || user?.id === id) {
                     const picture = await prisma.profile_pictures.findUnique({
-                        where: { id }
+                        where: { 
+                            user_id: id
+                        }
                     })
 
                     if (picture) {
                         await prisma.profile_pictures.delete({
-                            where: { id }
+                            where: { 
+                                user_id: id
+                            }
                         })
 
                         res.status(200).json({ message: 'profile picture deleted' })
