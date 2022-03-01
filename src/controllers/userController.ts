@@ -15,7 +15,7 @@ import { CustomRequest } from '../types'
 const userController = {
     auth: async (req: Request, res: Response): Promise<void> => {
         try {
-            const { email, password } = req.query
+            const { email, password } = req.body
 
             if (email && password) {
                 const user = await prisma.users.findUnique({
@@ -69,8 +69,8 @@ const userController = {
 
     googleAuth: async( req: Request, res: Response): Promise<void> => {
         try {
-            const idToken: any = req.query?.idToken
-            const name: any = req.query?.name
+            const idToken: any = req.body?.idToken
+            const name: any = req.body?.name
             
             if (idToken && name) {
                 const { email }: any = await verifyIdGoogleToken(idToken).catch(err =>

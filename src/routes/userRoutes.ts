@@ -9,8 +9,8 @@ userRoutes.get('/', (req: Request, res: Response): void => {
     res.redirect('http://localhost:3333/documentation')
 })
 
-userRoutes.get('/user/auth', userController.auth)
-userRoutes.get('/user/google-auth', userController.googleAuth)
+userRoutes.post('/user/auth', userController.auth)
+userRoutes.post('/user/google-auth', userController.googleAuth)
 userRoutes.post('/user/create', userController.create)
 userRoutes.get('/user/list', verifyToken, userController.list)
 userRoutes.get('/user/data', verifyToken, userController.data)
