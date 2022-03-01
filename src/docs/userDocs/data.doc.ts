@@ -40,6 +40,9 @@ const data = {
                                     },
                                     email: {
                                         type: 'string'
+                                    },
+                                    picture_url: {
+                                        type: 'string'
                                     }
                                 },
                                 example: {
@@ -47,7 +50,8 @@ const data = {
                                     name: 'joao',
                                     access_level: 'admin',
                                     phone: '99999999999',
-                                    email: 'joao@provider.com'
+                                    email: 'joao@provider.com',
+                                    picture_url: 'https://images/files/4f3362832e9b895ea80f4322ffb917b8-ME.JPG'
                                 }
                             }
                         }
