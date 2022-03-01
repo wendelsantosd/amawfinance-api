@@ -202,7 +202,8 @@ const userController = {
                 name: true,
                 access_level: true,
                 phone: true,
-                email: true
+                email: true,
+                picture_url: true
             }
         })
 
@@ -223,11 +224,23 @@ const userController = {
                             name: true,
                             access_level: true,
                             phone: true,
-                            email: true
+                            email: true,
+                            picture_url: true
                         }
                     })
 
                     if (targetUser) {
+
+                        const picture = await prisma.profile_pictures.findUnique({
+                            where: {
+                                user_id: targetUser.id
+                            }
+                        })
+                        
+                        if (picture) {
+                            targetUser.picture_url = picture.url
+                        }
+
                         res.status(200).json(targetUser)
                     } else {
                         res.status(404).json({ message: 'target user not found' })
