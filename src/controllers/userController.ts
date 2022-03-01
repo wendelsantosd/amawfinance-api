@@ -274,6 +274,7 @@ const userController = {
                         delete data?.access_level
                         delete data?.email
                         delete data?.confirmed_email
+                        delete data?.picture_url
                         data.updated_at = nowLocalDate()
 
                         await prisma.users.update({
@@ -561,6 +562,8 @@ const userController = {
                     })
 
                     if (user) {
+                        const { loginUrl } = config.REDIRECT
+
                         await prisma.users.update({
                             where: {
                                 id: payload?.id
@@ -572,10 +575,10 @@ const userController = {
                             }
                         })
 
-                        res.status(200).json({ message: 'email altered'})
+                        // res.status(200).json({ message: 'email altered'})
 
-                        // It Should redirect to page login
-                        // res.redirect()
+                        res.redirect(loginUrl)
+                        
                     } else {
                         res.status(404).json({ message: 'user not found' })
                     }
