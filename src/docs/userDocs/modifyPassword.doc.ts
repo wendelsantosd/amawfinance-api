@@ -1,6 +1,6 @@
 const modifyPassword = {
     '/user/modify-password': {
-        put: {
+        patch: {
             tags: [
                 'User'
             ],
