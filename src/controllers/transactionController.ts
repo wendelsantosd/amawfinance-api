@@ -96,6 +96,10 @@ const transactionController = {
                         const data = { ...req.body }
 
                         delete data.userId
+                        delete data.created_at
+                        delete data.user_id
+                        delete data.year
+                        delete data.month
                         data.updated_at = nowLocalDate()
 
                         await prisma.transactions.update({
