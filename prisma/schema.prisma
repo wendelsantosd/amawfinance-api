@@ -39,7 +39,6 @@ model transactions {
   description String                @db.VarChar(255)
   amount      Float
   type        enum_transaction_type
-  date        DateTime              @db.Timestamptz(6)
   month       Int
   year        Int
   user_id     String

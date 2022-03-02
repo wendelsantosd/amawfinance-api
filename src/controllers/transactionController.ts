@@ -15,8 +15,8 @@ const transactionController = {
             if (id) {
                 if (user?.access_level === 'admin' || user?.id === id) {
 
-                    const month = new Date(data.date).getMonth()
-                    const year = new Date(data.date).getFullYear()
+                    const month = new Date(nowLocalDate()).getMonth()
+                    const year = new Date(nowLocalDate()).getFullYear()
 
                     data.user_id = id
                     data.month = month
@@ -174,8 +174,7 @@ const transactionController = {
                             id: true,
                             description: true,
                             amount: true,
-                            type: true,
-                            date: true
+                            type: true
                         }
                     })
 
