@@ -4,6 +4,7 @@ import { data } from './data.doc'
 import { _delete } from './delete.doc'
 import { list } from './list.doc'
 import { listByUserMonthYear } from './listByUserMonthYear.doc'
+import { listByUserYear } from './listByUserYear.doc'
 import { update } from './update.doc'
 
 const transactionDocs = { 
@@ -12,7 +13,8 @@ const transactionDocs = {
     ...data,
     ...update,
     ..._delete,
-    ...listByUserMonthYear
+    ...listByUserMonthYear,
+    ...listByUserYear
 }
 
 export { transactionDocs }
