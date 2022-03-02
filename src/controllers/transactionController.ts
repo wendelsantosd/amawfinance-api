@@ -174,6 +174,11 @@ const transactionController = {
                                 }
                             ]
                         },
+                        orderBy:[
+                            {
+                                created_at: 'asc'
+                            }
+                        ],
                         select: {
                             id: true,
                             description: true,
