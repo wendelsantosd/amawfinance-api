@@ -23,6 +23,12 @@ type CustomPictureProfileRequest = CustomRequest & {
     }
 }
 
+export interface getTransactionsProps {
+    id: string
+    month: number
+    year: number | string
+}
+
 export {
     CustomRequest,
     MulterConfig,

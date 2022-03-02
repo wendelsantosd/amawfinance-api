@@ -11,5 +11,6 @@ transactionRoutes.get('/transaction/data', verifyToken, transactionController.da
 transactionRoutes.put('/transaction/update', verifyToken, transactionController.update)
 transactionRoutes.delete('/transaction/delete', verifyToken, transactionController.delete)
 transactionRoutes.get('/transaction/list-by-user-month-year', verifyToken, transactionController.listByUserMonthYear)
+transactionRoutes.get('/transaction/list-by-user-year', verifyToken, transactionController.listByUserYear)
 
 export default transactionRoutes

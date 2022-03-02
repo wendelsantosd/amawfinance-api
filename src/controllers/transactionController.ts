@@ -1,7 +1,9 @@
 import { Response } from 'express'
 
 import { prisma } from '../database'
+import { getTransactions } from '../provider/getTransactions'
 import { nowLocalDate } from '../provider/nowLocalDate'
+import { sumTransactions } from '../provider/sumTransactions'
 import { CustomRequest } from '../types'
 
 
@@ -189,6 +191,64 @@ const transactionController = {
                     })
 
                     res.status(200).json(transactions)
+                } else {
+                    res.status(403).json({ message: 'could not access' })
+                }
+            } else {
+                res.status(412).json({ message: 'missing arguments' })
+            }
+        } catch (err: any) {
+            res.status(500).json({ message: err.message })
+        }
+    },
+
+    listByUserYear: async (req: CustomRequest, res: Response): Promise<void> => {
+        try {
+            const { user } = req
+            const { id, year } = req.query
+
+            if (id && year) {
+                if (user?.access_level === 'admin' || user?.id === id) {
+                    const janT = await getTransactions({id, month: 0, year})
+                    const febT = await getTransactions({id, month: 1, year})
+                    const marT = await getTransactions({id, month: 2, year})
+                    const aprT = await getTransactions({id, month: 3, year})
+                    const mayT = await getTransactions({id, month: 4, year})
+                    const junT = await getTransactions({id, month: 5, year})
+                    const julT = await getTransactions({id, month: 6, year})
+                    const augT = await getTransactions({id, month: 7, year})
+                    const sepT = await getTransactions({id, month: 8, year})
+                    const octT = await getTransactions({id, month: 9, year})
+                    const novT = await getTransactions({id, month: 10, year})
+                    const decT = await getTransactions({id, month: 11, year})
+
+                    const sumJanT = sumTransactions(janT)
+                    const sumFevT = sumTransactions(febT)
+                    const sumMarT = sumTransactions(marT)
+                    const sumAprT = sumTransactions(aprT)
+                    const sumMayT = sumTransactions(mayT)
+                    const sumJunT = sumTransactions(junT)
+                    const sumJulT = sumTransactions(julT)
+                    const sumAugT = sumTransactions(augT)
+                    const sumSepT = sumTransactions(sepT)
+                    const sumOctT = sumTransactions(octT)
+                    const sumNovT = sumTransactions(novT)
+                    const sumDecT = sumTransactions(decT)
+                    
+                    res.status(200).json({
+                        sumJanT,
+                        sumFevT,
+                        sumMarT,
+                        sumAprT,
+                        sumMayT,
+                        sumJunT,
+                        sumJulT,
+                        sumAugT,
+                        sumSepT,
+                        sumOctT,
+                        sumNovT,
+                        sumDecT
+                    })
                 } else {
                     res.status(403).json({ message: 'could not access' })
                 }
