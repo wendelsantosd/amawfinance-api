@@ -174,7 +174,8 @@ const transactionController = {
                             id: true,
                             description: true,
                             amount: true,
-                            type: true
+                            type: true,
+                            created_at: true
                         }
                     })
 
