@@ -33,16 +33,12 @@ const create = {
                                 },
                                 type: {
                                     type: 'string'
-                                },
-                                date: {
-                                    type: 'string'
                                 }
                             },
                             example: {
                                 name: 'Aluguel',
                                 amount: 300.50,
-                                type: 'expense',
-                                date: '2022-02-10T14:50:09.383Z'
+                                type: 'expense'
                             }
                         }
                     }
