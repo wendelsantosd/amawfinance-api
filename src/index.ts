@@ -30,6 +30,6 @@ app.use(
     express.static(path.resolve(__dirname, '..', 'tmp', 'uploads'))
 )
 
-app.listen(process.env.PORT || config.HTTP_SERVER_PORT, () => { console.log('Server is running!') })
+app.listen(process.env.PORT, () => { console.log('Server is running!') })
 
 export { app }
