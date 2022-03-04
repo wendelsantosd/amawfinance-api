@@ -20,9 +20,7 @@ const profilePictureController = {
             if (id) {
                 if (user?.access_level === 'admin' || user?.id === id) {
                     const targetUser = await prisma.users.findUnique({
-                        where: {
-                            id: user.id
-                        }
+                        where: { id }
                     })
 
                     if (targetUser) {
@@ -40,13 +38,11 @@ const profilePictureController = {
                         })
 
                         if (existingImage) {
-                            await prisma.profile_pictures.delete({
-                                where: { 
-                                    user_id: targetUser.id
-                                }
-                            })
 
-                            await prisma.profile_pictures.create({
+                            await prisma.profile_pictures.update({
+                                where: {
+                                    id: existingImage.id
+                                },
                                 data: {
                                     name,
                                     size,
@@ -103,6 +99,7 @@ const profilePictureController = {
                 res.status(412).json({ message: 'missing id'})
             }
         } catch (err: any) {
+            console.log(req.query)
             res.status(500).json({ message: err.message })
         }
     },

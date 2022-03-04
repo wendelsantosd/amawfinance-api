@@ -1,12 +1,13 @@
 {
   "name": "amawfinance-api",
   "description": "Amaw Finance API",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "main": "index.js",
   "license": "MIT",
   "author": "Wendel Santos",
   "scripts": {
     "dev": "nodemon",
+    "start": "node dist",
     "build": "rm -rf dist && babel src --extensions \".ts\" --out-dir dist --copy-files --no-copy-ignored",
     "seed": "tsc ./src/seed/adminUser.ts && node ./src/seed/adminUser.js && rm -rf ./src/**/**.js",
     "lint": "yarn eslint --fix src/**/*.ts",
