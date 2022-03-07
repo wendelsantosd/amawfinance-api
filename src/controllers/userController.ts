@@ -1,6 +1,6 @@
 import {hash, compare } from 'bcrypt'
 import { createHash } from 'crypto'
-import { json, Request, Response } from 'express'
+import { Request, Response } from 'express'
 import { sign, verify } from 'jsonwebtoken'
 
 
