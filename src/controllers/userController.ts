@@ -388,8 +388,6 @@ const userController = {
                     })
 
                     if (user) {
-                        const { loginUrl } = config.REDIRECT
-
                         await prisma.users.update({
                             where: { id },
                             data: {
@@ -400,7 +398,7 @@ const userController = {
 
                         // res.status(200).json({ message: 'email confirmed' })
 
-                        res.redirect(loginUrl)
+                        res.redirect(`${process.env.URL_WEB}`)
                     } else {
                         res.status(404).json({ message: 'user not found' })
                     }
