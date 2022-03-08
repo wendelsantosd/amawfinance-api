@@ -20,7 +20,7 @@ const config : {
     },
     NODEMAILER: {
         user: 'amawacademic@gmail.com',
-        pass: 'financeplatform$'
+        pass: '@e3b0c44298%fc1c149afbf4c89&&96fb92427ae41e@@4649b934ca495991b7852b855$'
     },
     REDIRECT: {
         loginUrl: 'http://localhost:3000/'

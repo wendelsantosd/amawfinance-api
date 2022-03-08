@@ -376,7 +376,7 @@ const userController = {
             if (token) {
                 const { secret } = config.JWT
 
-                verify(token, secret, async (err, payload) => {
+                verify(token, secret, async (err, payload: any) => {
                     if (err) {
                         res.status(401).json({ message: err.message})
                     }
