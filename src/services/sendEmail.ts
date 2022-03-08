@@ -10,11 +10,11 @@ const sendEmail = async (to: string, token: string, type: string): Promise<void>
     const from = 'Amaw Finance'
 
     if (type === 'confirmEmail') {
-        url = `http://localhost:3333/user/confirm-email/${token}`
+        url = `${process.env.URL_API}/user/confirm-email/${token}`
     } else if (type === 'recoverPassword') {
-        url = `http://localhost:3000/alter-password/${token}`
+        url = `${process.env.URL_WEB}/${token}`
     } else if (type === 'modifyEmail') {
-        url = `http://localhost:3333/user/alter-email/${to}/${token}`
+        url = `${process.env.URL_API}/user/alter-email/${to}/${token}`
     }
 
     const transporter = createTransport(
