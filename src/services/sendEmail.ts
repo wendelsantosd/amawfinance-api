@@ -12,7 +12,7 @@ const sendEmail = async (to: string, token: string, type: string): Promise<void>
     if (type === 'confirmEmail') {
         url = `${process.env.URL_API}/user/confirm-email/${token}`
     } else if (type === 'recoverPassword') {
-        url = `${process.env.URL_WEB}/${token}`
+        url = `${process.env.URL_WEB}/alter-password/${token}`
     } else if (type === 'modifyEmail') {
         url = `${process.env.URL_API}/user/alter-email/${to}/${token}`
     }

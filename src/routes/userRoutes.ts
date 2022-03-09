@@ -6,7 +6,7 @@ import { verifyToken } from '../middleware/verifyToken'
 const userRoutes = Router()
 
 userRoutes.get('/', (req: Request, res: Response): void => {
-    res.redirect('https://amawfinance-api.herokuapp.com/documentation')
+    res.redirect(`${process.env.URL_API}/documentation`)
 })
 
 userRoutes.post('/user/auth', userController.auth)

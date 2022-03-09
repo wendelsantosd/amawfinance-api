@@ -560,7 +560,6 @@ const userController = {
                     })
 
                     if (user) {
-                        const { loginUrl } = config.REDIRECT
 
                         await prisma.users.update({
                             where: {
@@ -575,7 +574,7 @@ const userController = {
 
                         // res.status(200).json({ message: 'email altered'})
 
-                        res.redirect(loginUrl)
+                        res.redirect(`${process.env.URL_WEB}`)
                         
                     } else {
                         res.status(404).json({ message: 'user not found' })
