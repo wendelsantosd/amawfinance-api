@@ -26,7 +26,7 @@ const transactionController = {
                     data.created_at = nowLocalDate()
                     data.updated_at = nowLocalDate()
 
-                    await prisma.transactions.createMany({data})
+                    await prisma.transactions.create({data})
 
                     res.status(201).json({ message: 'transaction created'})
                 } else {
