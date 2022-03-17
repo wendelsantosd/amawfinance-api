@@ -16,7 +16,7 @@ const verifyToken = (
 
         verify(token, secret, (err, payload) => {
             if (err) {
-                res.status(401).json({ message: err.message })
+                return res.status(401).json({ message: err.message })
             }
 
             req.user = payload

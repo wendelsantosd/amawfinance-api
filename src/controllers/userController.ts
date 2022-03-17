@@ -378,7 +378,7 @@ const userController = {
 
                 verify(token, secret, async (err, payload: any) => {
                     if (err) {
-                        res.status(401).json({ message: err.message})
+                        return res.status(401).json({ message: err.message})
                     }
 
                     const id = payload?.id
@@ -457,7 +457,7 @@ const userController = {
 
                 verify(token, secret, async (err: any, payload: any) => {
                     if (err) {
-                        res.status(401).json({ message: err.message })
+                        return res.status(401).json({ message: err.message })
                     }
 
                     const user = await prisma.users.findUnique({
@@ -550,7 +550,7 @@ const userController = {
                 
                 verify(token, secret, async (err: any, payload: any) => {
                     if (err) {
-                        res.status(401).json({ message: err.message })
+                        return res.status(401).json({ message: err.message })
                     }
 
                     const user = await prisma.users.findUnique({
