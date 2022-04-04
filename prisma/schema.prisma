@@ -51,6 +51,7 @@ model transactions {
 
 model notifications {
   id         String   @id @default(uuid())
+  percentage Float
   message    String   @db.VarChar()
   month      Int
   year       Int
