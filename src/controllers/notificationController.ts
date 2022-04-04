@@ -28,18 +28,20 @@ export const notificationController = {
                         }
                     })
 
-                    const sum = sumTransactions(transactions)
+                    const sum = await sumTransactions(transactions)
 
                     const totalIncome = sum?.income
 
                     const totalExpense = sum?.expense                                                                                                                      
 
-                    const percentage = totalIncome/100*totalExpense
+                    const percentage = (totalExpense*100)/totalIncome
+
+                    const isIncome = totalIncome > 0
 
                     await prisma.notifications.create({
                         data: {
                             percentage,
-                            message: `Você já gastou ${percentage}% da sua receita total`,
+                            message: isIncome ? `Você já gastou ${percentage}% da sua receita total` : 'Você não tem receita cadastrada',
                             month: new Date().getMonth(), 
                             year: new Date().getFullYear(),
                             user_id: id,
@@ -48,7 +50,7 @@ export const notificationController = {
                         }
                     })
 
-                 
+                    res.status(201).json({ message: 'notification created'})
                 } else {
                     res.status(403).json({ message: 'could not access' })
                 }
