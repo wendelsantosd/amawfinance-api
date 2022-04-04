@@ -186,6 +186,7 @@ const transactionController = {
                             description: true,
                             amount: true,
                             type: true,
+                            category: true,
                             created_at: true
                         }
                     })
