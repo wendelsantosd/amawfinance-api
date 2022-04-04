@@ -32,7 +32,7 @@ export const notificationController = {
 
                     const totalIncome = sum?.income
 
-                    const totalExpense = sum?.expense
+                    const totalExpense = sum?.expense                                                                                                                      
 
                     const percentage = totalIncome/100*totalExpense
 
@@ -57,6 +57,77 @@ export const notificationController = {
             }
         } catch (err: any) {
             res.status(500).json({ message: err.message})
+        }
+    },
+
+    listByUserMonthYear: async (req: CustomRequest, res: Response): Promise<void> => {
+        try {
+            const { user } = req
+            const { id, month, year } = req.query
+
+            if (id && month && year) {
+                if (user?.access_level === 'admin' || user?.id === id) {
+                    const notifications = await prisma.notifications.findMany({
+                        where: {
+                            AND: [
+                                {
+                                    user_id: id
+                                },
+                                { 
+                                    month: parseInt(month)
+                                },
+                                { 
+                                    year: parseInt(year)
+                                }
+                            ]
+                        },
+                        orderBy:[
+                            {
+                                created_at: 'asc'
+                            }
+                        ]
+                    })
+
+                    res.status(200).json(notifications)
+                } else {
+                    res.status(403).json({ message: 'could not access' })
+                }
+            } else {
+                res.status(412).json({ message: 'missing arguments' })
+            }
+        } catch (err: any) {
+            res.status(500).json({ message: err.message })
+        }
+    },
+
+    delete: async (req: CustomRequest, res: Response): Promise<void> => {
+        try {
+            const { user } = req
+            const { id, userId } = req.query
+
+            if (id && userId) {
+                if (user?.access_level === 'admin' || user?.id === userId) {
+                    const notification = await prisma.notifications.findUnique({
+                        where: { id }
+                    })
+
+                    if (notification) {
+                        await prisma.notifications.delete({
+                            where: { id}
+                        })
+
+                        res.status(200).json({ message: 'notification deleted' })
+                    } else {
+                        res.status(404).json({ message: 'notification not found' })
+                    }
+                } else {
+                    res.status(403).json({ message: 'could not access' })
+                }
+            } else {
+                res.status(412).json({ message: 'missing arguments' })
+            }
+        } catch (err: any) {
+            res.status(500).json({ message: err.message })
         }
     }
 }
