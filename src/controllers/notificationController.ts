@@ -34,13 +34,13 @@ export const notificationController = {
 
                     const totalExpense = sum?.expense                                                                                                                      
 
-                    const percentage = (totalExpense*100)/totalIncome
+                    const percentage = ((totalExpense*100)/totalIncome).toFixed(2)
 
                     const isIncome = totalIncome > 0
 
                     await prisma.notifications.create({
                         data: {
-                            percentage,
+                            percentage: parseFloat(percentage),
                             message: isIncome ? `Você já gastou ${percentage}% da sua receita total` : 'Você não tem receita cadastrada',
                             month: new Date().getMonth(), 
                             year: new Date().getFullYear(),
