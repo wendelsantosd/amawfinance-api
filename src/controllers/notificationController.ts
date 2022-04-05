@@ -86,7 +86,7 @@ export const notificationController = {
                         },
                         orderBy:[
                             {
-                                created_at: 'asc'
+                                created_at: 'desc'
                             }
                         ]
                     })

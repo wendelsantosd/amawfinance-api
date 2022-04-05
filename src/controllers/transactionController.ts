@@ -4,6 +4,7 @@ import { prisma } from '../database'
 import { getTransactions } from '../provider/getTransactions'
 import { nowLocalDate } from '../provider/nowLocalDate'
 import { sumTransactions } from '../provider/sumTransactions'
+import { sumTransactionsByCategory } from '../provider/sumTransactionsByCategory'
 import { CustomRequest } from '../types'
 
 
@@ -235,6 +236,64 @@ const transactionController = {
                     const sumOctT = sumTransactions(octT)
                     const sumNovT = sumTransactions(novT)
                     const sumDecT = sumTransactions(decT)
+                    
+                    res.status(200).json({
+                        sumJanT,
+                        sumFevT,
+                        sumMarT,
+                        sumAprT,
+                        sumMayT,
+                        sumJunT,
+                        sumJulT,
+                        sumAugT,
+                        sumSepT,
+                        sumOctT,
+                        sumNovT,
+                        sumDecT
+                    })
+                } else {
+                    res.status(403).json({ message: 'could not access' })
+                }
+            } else {
+                res.status(412).json({ message: 'missing arguments' })
+            }
+        } catch (err: any) {
+            res.status(500).json({ message: err.message })
+        }
+    },
+
+    listByUserYearCategory: async (req: CustomRequest, res: Response): Promise<void> => {
+        try {
+            const { user } = req
+            const { id, year } = req.query
+
+            if (id && year) {
+                if (user?.access_level === 'admin' || user?.id === id) {
+                    const janT = await getTransactions({id, month: 0, year})
+                    const febT = await getTransactions({id, month: 1, year})
+                    const marT = await getTransactions({id, month: 2, year})
+                    const aprT = await getTransactions({id, month: 3, year})
+                    const mayT = await getTransactions({id, month: 4, year})
+                    const junT = await getTransactions({id, month: 5, year})
+                    const julT = await getTransactions({id, month: 6, year})
+                    const augT = await getTransactions({id, month: 7, year})
+                    const sepT = await getTransactions({id, month: 8, year})
+                    const octT = await getTransactions({id, month: 9, year})
+                    const novT = await getTransactions({id, month: 10, year})
+                    const decT = await getTransactions({id, month: 11, year})
+
+                    const sumJanT = sumTransactionsByCategory(janT)
+                    const sumFevT = sumTransactionsByCategory(febT)
+                    const sumMarT = sumTransactionsByCategory(marT)
+                    const sumAprT = sumTransactionsByCategory(aprT)
+                    const sumMayT = sumTransactionsByCategory(mayT)
+                    const sumJunT = sumTransactionsByCategory(junT)
+                    const sumJulT = sumTransactionsByCategory(julT)
+                    const sumAugT = sumTransactionsByCategory(augT)
+                    const sumSepT = sumTransactionsByCategory(sepT)
+                    const sumOctT = sumTransactionsByCategory(octT)
+                    const sumNovT = sumTransactionsByCategory(novT)
+                    const sumDecT = sumTransactionsByCategory(decT)
                     
                     res.status(200).json({
                         sumJanT,
