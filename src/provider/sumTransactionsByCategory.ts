@@ -14,6 +14,8 @@ export const sumTransactionsByCategory = transactions =>
             acc.leisure += transaction.amount
         } else if (transaction?.type == 'expense' && transaction?.category == 'Vestuário') {
             acc.clothing += transaction.amount
+        } else if (transaction?.type == 'expense' && transaction?.category == 'Outro') {
+            acc.other += transaction.amount
         } 
         return acc
     }, {
@@ -23,5 +25,6 @@ export const sumTransactionsByCategory = transactions =>
         health: 0,
         transport: 0,
         leisure: 0,
-        clothing: 0
+        clothing: 0,
+        other: 0
     })
