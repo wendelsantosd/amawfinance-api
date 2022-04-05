@@ -21,6 +21,7 @@ export const getTransactions = async ({id, month, year}: getTransactionsProps) =
         },
         select: {
             amount: true,
-            type: true
+            type: true,
+            category: true
         }
     })

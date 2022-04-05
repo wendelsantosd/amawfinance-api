@@ -21,7 +21,7 @@ export const sumTransactionsByCategory = transactions =>
         education: 0,
         food: 0,
         health: 0,
-        transactions: 0,
+        transport: 0,
         leisure: 0,
         clothing: 0
     })
