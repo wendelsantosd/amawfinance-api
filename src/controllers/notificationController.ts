@@ -56,7 +56,7 @@ export const notificationController = {
                     res.status(403).json({ message: 'could not access' })
                 }
             } else {
-                res.status(412).json({ message: 'missing arguments' })
+                res.status(412).json({ message: 'missing id' })
             }
         } catch (err: any) {
             res.status(500).json({ message: err.message})
@@ -107,7 +107,6 @@ export const notificationController = {
         try {
             const { user } = req
             const { id } = req.query
-            console.log(id)
 
             if (id) {
                 if (user?.access_level === 'admin' || user?.id === id) {

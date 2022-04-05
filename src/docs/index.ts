@@ -1,4 +1,5 @@
 import { version, description } from '../../package.json'
+import { notificationDocs } from './notificationDocs'
 import { profilePictureDocs } from './profilePictureDocs'
 import { transactionDocs } from './transactionDocs'
 import { userDocs } from './userDocs'
@@ -17,7 +18,8 @@ const swagger = {
     paths: {
         ...userDocs,
         ...profilePictureDocs,
-        ...transactionDocs
+        ...transactionDocs,
+        ...notificationDocs
     },
     components: {
         securitySchemes: {
