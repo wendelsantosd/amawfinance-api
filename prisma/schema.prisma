@@ -53,6 +53,7 @@ model notifications {
   id         String   @id @default(uuid())
   percentage Float
   message    String   @db.VarChar()
+  viewed     Boolean?
   month      Int
   year       Int
   user_id    String

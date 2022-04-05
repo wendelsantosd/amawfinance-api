@@ -45,6 +45,7 @@ export const notificationController = {
                             month: new Date().getMonth(), 
                             year: new Date().getFullYear(),
                             user_id: id,
+                            viewed: false,
                             created_at: new Date(),
                             updated_at: new Date()
                         }
@@ -91,6 +92,41 @@ export const notificationController = {
                     })
 
                     res.status(200).json(notifications)
+                } else {
+                    res.status(403).json({ message: 'could not access' })
+                }
+            } else {
+                res.status(412).json({ message: 'missing arguments' })
+            }
+        } catch (err: any) {
+            res.status(500).json({ message: err.message })
+        }
+    },
+
+    updateViewed: async (req: CustomRequest, res: Response): Promise<void> => {
+        try {
+            const { user } = req
+            const { id, userId } = req.query
+
+            if (id && userId) {
+                if (user?.access_level === 'admin' || user?.id === userId) {
+                  
+                    await prisma.notifications.updateMany({
+                        where: { 
+                            AND: {
+                                user_id: userId,
+                                viewed: {
+                                    equals: false
+                                }
+                            }
+                        },
+                        data: {
+                            viewed: true
+                        }
+                    })
+
+                    res.status(200).json({ message: 'notifications viwed' })
+                   
                 } else {
                     res.status(403).json({ message: 'could not access' })
                 }
