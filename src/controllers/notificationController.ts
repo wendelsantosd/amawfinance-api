@@ -106,15 +106,16 @@ export const notificationController = {
     updateViewed: async (req: CustomRequest, res: Response): Promise<void> => {
         try {
             const { user } = req
-            const { id, userId } = req.query
+            const { id } = req.query
+            console.log(id)
 
-            if (id && userId) {
-                if (user?.access_level === 'admin' || user?.id === userId) {
+            if (id) {
+                if (user?.access_level === 'admin' || user?.id === id) {
                   
                     await prisma.notifications.updateMany({
                         where: { 
                             AND: {
-                                user_id: userId,
+                                user_id: id,
                                 viewed: {
                                     equals: false
                                 }
