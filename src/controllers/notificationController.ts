@@ -41,7 +41,7 @@ export const notificationController = {
                     await prisma.notifications.create({
                         data: {
                             percentage: parseFloat(percentage),
-                            message: isIncome ? `Você já gastou ${percentage}% da sua receita total` : 'Você não tem receita cadastrada',
+                            message: isIncome ? `Você gastou ${percentage}% da sua receita total` : 'Você não tem receita cadastrada',
                             month: new Date().getMonth(), 
                             year: new Date().getFullYear(),
                             user_id: id,

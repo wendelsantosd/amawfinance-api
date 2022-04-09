@@ -72,7 +72,7 @@ const listByUserMonthYear = {
                                     {
                                         id: '119c4be1-f4c5-448d-aac2-2d4a4718f8f9',
                                         percentage: 93.73,
-                                        message: 'Você já gastou 93.73% da sua receita total',
+                                        message: 'Você gastou 93.73% da sua receita total',
                                         viewed: true,
                                         month: 3,
                                         year: 2022,
