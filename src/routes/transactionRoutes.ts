@@ -13,5 +13,6 @@ transactionRoutes.delete('/transaction/delete', verifyToken, transactionControll
 transactionRoutes.get('/transaction/list-by-user-month-year', verifyToken, transactionController.listByUserMonthYear)
 transactionRoutes.get('/transaction/list-by-user-year', verifyToken, transactionController.listByUserYear)
 transactionRoutes.get('/transaction/list-by-user-year-category', verifyToken, transactionController.listByUserYearCategory)
+transactionRoutes.get('/transaction/get-total', verifyToken, transactionController.getTotalAmountTransactions)
 
 export default transactionRoutes
