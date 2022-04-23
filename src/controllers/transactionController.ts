@@ -24,6 +24,7 @@ const transactionController = {
                     data.user_id = id
                     data.month = month
                     data.year = year
+                    data.amount = Number(data.amount)
                     data.created_at = nowLocalDate()
                     data.updated_at = nowLocalDate()
 
@@ -98,6 +99,7 @@ const transactionController = {
                     if (transaction) {
                         const data = { ...req.body }
 
+                        data.amount = Number(data.amount)
                         delete data.userId
                         delete data.created_at
                         delete data.user_id
