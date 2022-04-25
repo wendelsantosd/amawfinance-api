@@ -181,7 +181,7 @@ const transactionController = {
                         },
                         orderBy:[
                             {
-                                created_at: 'asc'
+                                created_at: 'desc'
                             }
                         ],
                         select: {
