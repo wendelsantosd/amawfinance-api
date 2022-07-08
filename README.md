@@ -3,7 +3,7 @@
 </div>
 <div>
 <h1 align="center">
-Amaw Finance
+Amaw Finance API
 </h1>
 </div>
 
@@ -15,7 +15,7 @@ Amaw Finance
 
 <img src="https://img.shields.io/badge/NodeJS-16.16.0-green">
 
-<img src="https://img.shields.io/badge/Projeto-Amaw%20Finance-B22222">
+<img src="https://img.shields.io/badge/Project-Amaw%20Finance-B22222">
 
 </div>
 
