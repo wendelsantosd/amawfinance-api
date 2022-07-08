@@ -50,8 +50,10 @@ const multerConfig: MulterConfig = {
     fileFilter: (req: Request, file: Express.Multer.File, cb: FileFilterCallback): void => {
         const allowedMimes = [
             'image/jpeg',
+            'image/jpg',
             'image/pjpeg',
-            'image/png'
+            'image/png',
+            'application/octet-stream'
         ]
 
         const mimetypes = file.mimetype

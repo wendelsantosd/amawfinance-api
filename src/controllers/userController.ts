@@ -67,13 +67,15 @@ const userController = {
         }
     },
 
-    googleAuth: async( req: Request, res: Response): Promise<void> => {
+    googleAuth: async( req: Request, res: Response): Promise<any> => {
         try {
             const idToken: any = req.body?.idToken
             const name: any = req.body?.name
-            
+            const isMobile: any = req.body?.isMobile || false
+            console.log(idToken)
+            console.log(name)
             if (idToken && name) {
-                const { email }: any = await verifyIdGoogleToken(idToken).catch(err =>
+                const { email }: any = await verifyIdGoogleToken(idToken, isMobile).catch(err =>
                     res.status(500).json({ message: err.message })
                 )
 
@@ -139,7 +141,7 @@ const userController = {
                 res.status(412).json({ message: 'missing arguments'})
             }
         } catch (err: any) {
-            res.status(500).json({ message: err.message })
+            return res.status(500).json({ message: err.message })
         }
     },
 

@@ -21,6 +21,7 @@ model users {
   picture_url     String?                @db.VarChar(255)
   profile_picture profile_pictures?
   transactions    transactions[]
+  notifications   notifications[]
 }
 
 model profile_pictures {
@@ -39,12 +40,26 @@ model transactions {
   description String                @db.VarChar(255)
   amount      Float
   type        enum_transaction_type
+  category    String?               @db.VarChar(255)
   month       Int
   year        Int
   user_id     String
   users       users                 @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   created_at  DateTime              @db.Timestamptz(6)
   updated_at  DateTime              @db.Timestamptz(6)
+}
+
+model notifications {
+  id         String   @id @default(uuid())
+  percentage Float
+  message    String   @db.VarChar()
+  viewed     Boolean?
+  month      Int
+  year       Int
+  user_id    String
+  users      users    @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  created_at DateTime @db.Timestamptz(6)
+  updated_at DateTime @db.Timestamptz(6)
 }
 
 enum enum_user_access_level {
