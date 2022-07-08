@@ -3,7 +3,7 @@
 </div>
 <div>
 <h1 align="center">
-Amaw Finance
+Amaw Finance API
 </h1>
 </div>
 
